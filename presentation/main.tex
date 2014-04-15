@@ -1,0 +1,35 @@
+% -*- coding: utf-8 -*-
+%UTF-8: äöüß
+%main.tex
+
+\pdfminorversion=4
+%\documentclass[handout,xcolor=svgnames]{beamer}
+\documentclass[presentation,xcolor=svgnames]{beamer}
+
+\include{preface}
+
+%%% Hier persoenliche Einstellungen anpassen
+\title[Parallele Algorithmen]{Parallele Algorithmen}
+%\subtitle{Untertitel}
+\author[F. Cardoso, L. Braun]{Francisco Cardoso, Lennart Braun}
+
+% PDF Dokumentinformationen: autorenspezifisch
+\hypersetup {
+	pdfauthor={Francisco Cardoso, Lennart Braun},
+%	pdftitle={Vortragstitel},
+ 	pdftitle = {\title -- \subtitle},
+%	pdfkeywords = {Deine Schlüsselwörter hier; nicht auskommentiert},
+}
+
+\begin{document}
+\maketitle
+\selectlanguage{ngerman}
+
+\input{content/first}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
