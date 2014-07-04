@@ -1,19 +1,33 @@
 \section{Parallele Rechnermodelle}
+Eine paralleles Modell zeichnet sich dadurch aus, dass mehrere Instruktionen gleichzeitig von Prozessoren ausgeführt werden.
+Eine parallele Maschine arbeitet \emph{synchron}, wenn in jedem Schritt alle Prozessoren gleichzeitig eine Instruktion ausführen.
+Die Instruktionen müssen nicht unbedingt identisch sein.
+Andernfalls arbeitet die Maschine \emph{asynchron}.
+Führen alle Prozessoren die gleichartige Instruktionen zur gleichen Zeit aus, wird dies \emph{Single Instruction Multiple Data (SIMD)} genannt; unterscheiden sich die Programme, so lautet die Bezeichnung \emph{Multiple Instructions Multiple Data (MIMD)}.
 
 \subsection{Circuit}
+Ein Circuit ist ein Repräsentation als gerichteter azyklischer Graph (engl. directed acyclic graph, DAG) mit benannten Knoten.
+Knoten ohne eingehende Kanten, die Blätter, stellen die Eingaben dar, Knoten ohne ausgehende Kanten, die Wurzeln, die Ausgaben.
+Die Knoten mit eingehenden Kanten sind mit den Operationen beschriftet, die jeweils in einer Zeiteinheit über maximal zwei Operanden, den eingehenden Kanten, ausgeführt werden.
+Die Zeitkomplexität eines Circuit ist die Tiefe des DAG.
+
+Ein Circuit kann aus einem Straight Line Program abgeleitet werden, indem jede Variable, der mehrfach ein Wert zugewiesen wird, durch entsprechend viele neue Variablen ersetzt wird.
+Die Knoten des Circuits entsprechen dann den verschiedenen Variablen aus dem SLP.
+Die Blätter entsprechen den Eingabevariablen.
+Die restlichen Knoten sind mit den Operationen der entsprechenden Variablenzuweisung beschriftet und haben eintreffende Kanten ausgehend von den Abhängigkeiten der Zuweisung.
+\cite[S.7]{jaja}\cite[S.11f.]{reif}
 
 \subsection{Network}
 
 
-\subsection{PRAM}
+\subsection{Parallel Random Access Machine}
 Eine Parallel Random Access Machine, im folgenden PRAM, ist ein oft genutztes Maschinenmodell, um parallele Algorithmen zu analysieren.
 
 Die PRAM besteht aus einem globalen Speicher mit $m$ Speicherzellen sowie $p$ Prozessoren.
 Jeder Prozessor ist selbst eine RAM mit lokalem Speicher, die jedoch Lese- und Schreibzugriff auf den globalen Speicher hat.
 Jedem Prozessor ist zusätzlich seine eigene Identität bekannt,
 
-Die \emph{work} einer PRAM ist das Produkt aus der Anzahl der verfügbaren Prozessoren und der Laufzeit.
+Die Operationenkomplexität einer PRAM ist das Produkt aus der Anzahl der verwendeten Prozessoren und der Zeitkomplexität.
 
-\cite{reif}
 
 \subsubsection{Access Restrictions}
