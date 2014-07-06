@@ -38,12 +38,15 @@ In Gittergraphen oder Hyperwürfel verfügen die einzelnen Prozessoren über ein
 
 \subsection{Parallel Random Access Machine}
 Eine Parallel Random Access Machine, im folgenden PRAM, ist ein oft genutztes Maschinenmodell, um parallele Algorithmen zu analysieren.
-
-Die PRAM besteht aus einem globalen Speicher mit $m$ Speicherzellen sowie $p$ Prozessoren.
-Jeder Prozessor ist selbst eine RAM mit lokalem Speicher, die jedoch Lese- und Schreibzugriff auf den globalen Speicher hat.
-Jedem Prozessor ist zusätzlich seine eigene Identität bekannt,
-
+Als eine Erweiterung der RAM, besteht sie aus $p$ Prozessoren, von denen jeder wiederum eine RAM ist, und einer globalen Speichereinheit (\emph{shared memory}).
+Jeder Prozessor besitzt einen lokalen Speicher und führt ein lokales Programm aus.
+Da sich die Instruktionen, die in einer Zeiteinheit ausgeführt werden, grundsätzlich unterscheiden können, gibt es sowohl MIMD als auch SIMD PRAM.
+Wir betrachten jedoch letztere.
+Die RAMs sind nicht direkt miteinander verbunden, verfügen jedoch über die Anweisungen \emph{global read(X,Y)} und \emph{global write(X,Y)}, mit denen Speicherblöcke aus bzw. in dem shared Memory kopiert werden können.
+Der Umfang der Kommunikation zwischen den Prozessoren ist die Menge an Daten, welche zwischen den lokalen und dem globalen Speicher übermittelt wird.
+Jedem Prozessor ist zusätzlich seine eigene Identität bekannt, so dass bedingte Anweisungen ermöglichen, Blöcke nur auf bestimmten Prozessoren auszuführen.
 Die Operationenkomplexität einer PRAM ist das Produkt aus der Anzahl der verwendeten Prozessoren und der Zeitkomplexität.
+\cite[S.9ff.]{jaja}
 
 
 \subsubsection{Zugriffsbeschränkungen}
@@ -58,3 +61,4 @@ Die \emph{common CRCW} lässt einen gleichzeitigen Schreibzugriff nur zu, falls 
 Beim \emph{arbitrary CRCW} schreibt ein beliebiger Prozessor in die Speicherzelle.
 Die \emph{priority CRCW} gibt dem beteiligten Prozessor mit der höchsten Priorität (z.\,B. mit der niedrigsten ID) den Schreibzugriff.
 Bei der Entwicklung von Algorithmen muss auf die Eigenschaften der verwendeten PRAM eingegangen werden. Beispielsweise darf es bei einem arbitrary CRCW keine Rolle spielen, welcher der Prozessoren in einem Schritt den Schreibzugriff bekommt.
+\cite[S.14f.]{jaja}
