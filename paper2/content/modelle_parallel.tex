@@ -46,21 +46,15 @@ Jedem Prozessor ist zusätzlich seine eigene Identität bekannt,
 Die Operationenkomplexität einer PRAM ist das Produkt aus der Anzahl der verwendeten Prozessoren und der Zeitkomplexität.
 
 
-\subsubsection{Access Restrictions}
+\subsubsection{Zugriffsbeschränkungen}
 Für PRAM Modelle existieren verschiedene Beschränkungen in Bezug auf simultanen Zugriff auf den globalen Speicher.
 Die verschiedenen Modelle sind unterschiedlich mächtig. Sie lassen sich unter erhöhtem Ressourcenverbrauch jedoch gegenseitig simulieren.
 Im Folgenden sind die üblichen Variationen in aufsteigender Mächtigkeit aufgelistet.
-\begin{description}
-    \item[EREW PRAM]
-        Bei der EREW PRAM kann ein Prozessor zur Zeit eine Speicherzelle auslesen (\emph{exclusive read}) und schreiben (\emph{exclusive write}).
-    \item[CREW PRAM]
-        Mehrere Prozessoren können bei der CREW gleichzeitig aus der selben Speicherzelle lesen (\emph{concurrent read}), der Schreibzugriff ist jedoch auf einen Prozessor pro Zeiteinheit begrenzt.
-    \item[CRCW PRAM]
-        Die CRCW PRAM erlaubt sowohl simultanen Lesezugriff als auch simultanen Schreibzugriff (\emph{concurrent write}). Bei letzterem können Konflikte entstehen, die durch verschiedene Subtypen behandelt werden.
-        \begin{description}
-            \item[common CRCW] Alle beteiligten Prozessoren müssen den gleichen Wert schreiben.
-            \item[arbitrary CRCW] Ein beliebiger Prozessor erhält den Schreibzugriff.
-            \item[priority CRCW] Der Prozessor mit der niedrigsten ID schreibt in die Speicherzelle.
-        \end{description}
-\end{description}
+Bei der EREW PRAM kann ein Prozessor zur Zeit eine Speicherzelle auslesen (\emph{exclusive read}) und schreiben (\emph{exclusive write}).
+Die CREW lässt mehrere Prozessoren gleichzeitig aus der selben Speicherzelle lesen (\emph{concurrent read}), der Schreibzugriff ist jedoch auf einen Prozessor pro Zeiteinheit begrenzt.
+Die CRCW PRAM erlaubt sowohl simultanen Lesezugriff als auch simultanen Schreibzugriff (\emph{concurrent write}).
+Bei letzterem können Konflikte entstehen, wenn verschiedene Prozessoren versuchen, gleichzeitig in die selbe Speicherzelle zu schreiben. Diese werden durch verschiedene Subtypen behandelt werden.
+Die \emph{common CRCW} lässt einen gleichzeitigen Schreibzugriff nur zu, falls alle beteiligten Prozessoren den gleichen Wert schreiben.
+Beim \emph{arbitrary CRCW} schreibt ein beliebiger Prozessor in die Speicherzelle.
+Die \emph{priority CRCW} gibt dem beteiligten Prozessor mit der höchsten Priorität (z.\,B. mit der niedrigsten ID) den Schreibzugriff.
 Bei der Entwicklung von Algorithmen muss auf die Eigenschaften der verwendeten PRAM eingegangen werden. Beispielsweise darf es bei einem arbitrary CRCW keine Rolle spielen, welcher der Prozessoren in einem Schritt den Schreibzugriff bekommt.
