@@ -17,7 +17,23 @@ Die Blätter entsprechen den Eingabevariablen.
 Die restlichen Knoten sind mit den Operationen der entsprechenden Variablenzuweisung beschriftet und haben eintreffende Kanten ausgehend von den Abhängigkeiten der Zuweisung.
 \cite[S.7]{jaja}\cite[S.11f.]{reif}
 
+
 \subsection{Network}
+Ein Netzwerk aus Prozessoren ist ein ungerichteter Graph $G = (V,E)$.
+Jeder Knoten $p \in V$ ist ein Prozessor mit lokalem Speicher. Ein gemeinsamer globaler Speicher ist nicht vorhanden.
+Jede Kante $(p_i, p_j) \in E$ stellt eine beidseitige Kommunikationsverbindung zwischen den Prozessoren $p_i$ und $p_j$ dar.
+Der Befehlssatz enthält Anweisungen für die Netzwerkkommunikation.
+\emph{send(x, i)} schickt die Kopie einer lokalen Variable $x$ an den Prozessor $p_i$.
+Anschließend wird die Ausführung des Programmes fortgesetzt.
+\emph{receive(y, j)} wartet auf eine Nachricht vom Prozessor $p_j$ und speichert deren Inhalt in der lokalen Variablen $y$.
+Im Gegensatz zur Anweisung send, wird die Ausführung so lange unterbrochen, bis tatsächlich eine Nachricht erhalten wird.
+Es ist möglich Routingprotokolle zu implementieren, die eine Kommunikation von nicht adjazenten Prozessoren erlaubt.
+
+Die Topologie des Graphen ist Bestandteil des Netzwerkmodells.
+Zu betrachtende Eigenschaften des Graphen können Durchmesser, Maximalgrad und Zusammenhang sein.
+Einfache Netzwerke sind etwas als lineare Graphen oder Kreisgraphen realisiert.
+In Gittergraphen oder Hyperwürfel verfügen die einzelnen Prozessoren über eine höhere Anzahl an Kommunikationsverbindungen.
+\cite[S.16f.]{jaja}
 
 
 \subsection{Parallel Random Access Machine}
@@ -47,4 +63,4 @@ Im Folgenden sind die üblichen Variationen in aufsteigender Mächtigkeit aufgel
             \item[priority CRCW] Der Prozessor mit der niedrigsten ID schreibt in die Speicherzelle.
         \end{description}
 \end{description}
-Bei der Entwicklung von Algorithmen muss auf die Eigenschaften der verwendeten PRAM eingegangen werden. Beispielsweise darf es bei einem arbitrary CRCW keine Rolle spielen, welcher der Prozessoren in einem Schritt den SChreibzugriff bekommt.
+Bei der Entwicklung von Algorithmen muss auf die Eigenschaften der verwendeten PRAM eingegangen werden. Beispielsweise darf es bei einem arbitrary CRCW keine Rolle spielen, welcher der Prozessoren in einem Schritt den Schreibzugriff bekommt.
