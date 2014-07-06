@@ -41,7 +41,6 @@ Eine Parallel Random Access Machine, im folgenden PRAM, ist ein oft genutztes Ma
 Als eine Erweiterung der RAM, besteht sie aus $p$ Prozessoren, von denen jeder wiederum eine RAM ist, und einer globalen Speichereinheit (\emph{shared memory}).
 Jeder Prozessor besitzt einen lokalen Speicher und führt ein lokales Programm aus.
 Da sich die Instruktionen, die in einer Zeiteinheit ausgeführt werden, grundsätzlich unterscheiden können, gibt es sowohl MIMD als auch SIMD PRAM.
-Wir betrachten jedoch letztere.
 Die RAMs sind nicht direkt miteinander verbunden, verfügen jedoch über die Anweisungen \emph{global read(X,Y)} und \emph{global write(X,Y)}, mit denen Speicherblöcke aus bzw. in dem shared Memory kopiert werden können.
 Der Umfang der Kommunikation zwischen den Prozessoren ist die Menge an Daten, welche zwischen den lokalen und dem globalen Speicher übermittelt wird.
 Jedem Prozessor ist zusätzlich seine eigene Identität bekannt, so dass bedingte Anweisungen ermöglichen, Blöcke nur auf bestimmten Prozessoren auszuführen.
