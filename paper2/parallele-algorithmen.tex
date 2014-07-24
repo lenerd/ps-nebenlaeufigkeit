@@ -1,0 +1,46 @@
+\documentclass{llncs}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath, amsfonts}
+\spnewtheorem{define}{Definition}{\bfseries}{\rmfamily}
+
+\usepackage[style=alphabetic, backend=biber]{biblatex}
+\bibliography{../parallele-algorithmen} 
+
+\begin{document}
+
+\pagestyle{headings}
+
+\title{Parallele Algorithmen}
+
+\author{Lennart Braun}
+
+\institute{
+    Universität Hamburg,
+    Fakultät für Mathematik, Informatik und Naturwissenschaften,
+    Fachbereich Informatik,
+    Arbeitsbereich TGI,
+    Proseminar Nebenläufigkeit SS 14
+    \email{3braun@informatik.uni-hamburg.de}
+}
+
+\maketitle
+
+\begin{abstract}
+Wir stellen verschiedene Modelle für parallele Architekturen vor und gehen auf die verschiedenen Eigenschaften ein. Weiterhin wird auf Möglichkeiten eingegangen, Algorithmen zu paralelisieren.
+\keywords{parallele Algorithmen, PRAM, Sortieralgorithmen}
+\end{abstract}
+
+\input{content/einleitung}
+\input{content/modelle_sequentiell}
+\input{content/modelle_parallel}
+\input{content/analyse}
+
+\pagebreak
+\printbibliography
+
+\end{document}

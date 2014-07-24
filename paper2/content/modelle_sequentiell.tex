@@ -1,0 +1,36 @@
+\section{Sequentielle Rechnermodelle}
+Sequentielle Modelle zeichnen sich dadurch aus, dass Instruktionen der Reihe nach ausgeführt werden.
+Die Zeitkomplexität (\emph{time}) entspricht dabei der Operationenkomplexität (\emph{work}), die erbracht wurde und berechnet sich aus der Anzahl der ausgeführten Operationen.
+Die Platzkomplexität (\emph{space}) ist modellspezifisch.
+
+
+\subsection{Straight Line Program}
+Ein einfaches Modell ist das Straight Line Program (SPL).
+Es besitzt eine Menge von Variablen, mit den Teilmengen der Eingabe- und die Ausgabevariablen.
+Das Programm besteht aus einer Abfolge von Operationen.
+Mit jedem Ausführungsschritt wird einer Variablen der Wert einer $k$-stelligen Operation zugewiesen.
+Als Operanden werden Variablen mit bereits definierten Werten übergeben.
+\emph{space} ist die Anzahl aller genutzten Variablen abzüglich der Eingabevariablen.
+\emph{time} entspricht der Anzahl der Zuweisungen.
+Die Basis eines SPL ist die Menge der Belegungen der Variablen.
+Ein SPL wird als boolesch bezeichnet, wenn sowohl die Basis als auch alle Operationen binär sind.
+\cite[S. 9]{reif}
+
+
+\subsection{Random Access Machine}
+Die Random Access Machine (RAM) ist ein häufig genutztes Modell.
+Sie ist gleich mächtig zur Turingmaschine; sie lassen sich gegenseitig simulieren.
+Die RAM hat jedoch den Vorteil, ein Modell zu sein, das den realen Von-Neumann-Rechnern ähnlich ist.
+
+Eine RAM hat eine feste Anzahl von Registern und eine unbegrenzte Anzahl von Speicherzellen, die durch vorzeichenlose Ganzzahlen adressiert werden.
+Je nach Verwendungszweck werden Werte aus verschiedenen Mengen, etwa $\mathbb{N}$, $\mathbb{R}$ oder andere algebraische Strukturen, als Speicherinhalte zugelassen.
+Der Befehlssatz einer RAM enthält Anweisungen, um den Speicher anzusprechen.
+Es ist möglich unter angabe der Adresse Werte aus dem Speicher zu laden (\emph{load}) und in den Speicher zu schreiben (\emph{store}).
+Weitere Befehle für bedingte Verzweigungen oder Arithmetik sind üblicherweise vorhanden.
+
+Wir werden im Folgenden der Einfachheit halber uniforme Komplexitätsmaße verwenden.
+Eine Zeiteinheit entspricht der Ausführung eines Programmschrittes
+und eine Platzeinheit einem Register oder einer Speicherzelle.
+Die Zeitkomplexität eines Algorithmus auf einer RAM entspricht also der Anzahl der ausgeführten Operationen, die Platzkomplexität der Anzahl der verwendeten Speicherzellen.
+\cite[S. 9ff.]{reif}
+\cite[S. 184ff.]{fgi2}

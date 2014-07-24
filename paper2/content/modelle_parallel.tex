@@ -1,0 +1,63 @@
+\section{Parallele Rechnermodelle}
+Eine paralleles Modell zeichnet sich dadurch aus, dass mehrere Instruktionen gleichzeitig von Prozessoren ausgeführt werden.
+Eine parallele Maschine arbeitet \emph{synchron}, wenn in jedem Schritt alle Prozessoren gleichzeitig eine Instruktion ausführen.
+Die Instruktionen müssen nicht unbedingt identisch sein.
+Andernfalls arbeitet die Maschine \emph{asynchron}.
+Führen alle Prozessoren die gleichartige Instruktionen zur gleichen Zeit aus, wird dies \emph{Single Instruction Multiple Data (SIMD)} genannt; unterscheiden sich die Programme, so lautet die Bezeichnung \emph{Multiple Instructions Multiple Data (MIMD)}.
+
+\subsection{Circuit}
+Ein Circuit ist ein Repräsentation als gerichteter azyklischer Graph (engl. directed acyclic graph, DAG) mit benannten Knoten.
+Knoten ohne eingehende Kanten, die Blätter, stellen die Eingaben dar, Knoten ohne ausgehende Kanten, die Wurzeln, die Ausgaben.
+Die Knoten mit eingehenden Kanten sind mit den Operationen beschriftet, die jeweils in einer Zeiteinheit über maximal zwei Operanden, den eingehenden Kanten, ausgeführt werden.
+Die Zeitkomplexität eines Circuit ist die Tiefe des DAG.
+
+Ein Circuit kann aus einem Straight Line Program abgeleitet werden, indem jede Variable, der mehrfach ein Wert zugewiesen wird, durch entsprechend viele neue Variablen ersetzt wird.
+Die Knoten des Circuits entsprechen dann den verschiedenen Variablen aus dem SLP.
+Die Blätter entsprechen den Eingabevariablen.
+Die restlichen Knoten sind mit den Operationen der entsprechenden Variablenzuweisung beschriftet und haben eintreffende Kanten ausgehend von den Abhängigkeiten der Zuweisung.
+\cite[S.7]{jaja}\cite[S.11f.]{reif}
+
+
+\subsection{Network}
+Ein Netzwerk aus Prozessoren ist ein ungerichteter Graph $G = (V,E)$.
+Jeder Knoten $p \in V$ ist ein Prozessor mit lokalem Speicher. Ein gemeinsamer globaler Speicher ist nicht vorhanden.
+Jede Kante $(p_i, p_j) \in E$ stellt eine beidseitige Kommunikationsverbindung zwischen den Prozessoren $p_i$ und $p_j$ dar.
+Der Befehlssatz enthält Anweisungen für die Netzwerkkommunikation.
+\emph{send(x, i)} schickt die Kopie einer lokalen Variable $x$ an den Prozessor $p_i$.
+Anschließend wird die Ausführung des Programmes fortgesetzt.
+\emph{receive(y, j)} wartet auf eine Nachricht vom Prozessor $p_j$ und speichert deren Inhalt in der lokalen Variablen $y$.
+Im Gegensatz zur Anweisung send, wird die Ausführung so lange unterbrochen, bis tatsächlich eine Nachricht erhalten wird.
+Es ist möglich Routingprotokolle zu implementieren, die eine Kommunikation von nicht adjazenten Prozessoren erlaubt.
+
+Die Topologie des Graphen ist Bestandteil des Netzwerkmodells.
+Zu betrachtende Eigenschaften des Graphen können Durchmesser, Maximalgrad und Zusammenhang sein.
+Einfache Netzwerke sind etwas als lineare Graphen oder Kreisgraphen realisiert.
+In Gittergraphen oder Hyperwürfel verfügen die einzelnen Prozessoren über eine höhere Anzahl an Kommunikationsverbindungen.
+\cite[S.16f.]{jaja}
+
+
+\subsection{Parallel Random Access Machine}
+Eine Parallel Random Access Machine, im folgenden PRAM, ist ein oft genutztes Maschinenmodell, um parallele Algorithmen zu analysieren.
+Als eine Erweiterung der RAM, besteht sie aus $p$ Prozessoren, von denen jeder wiederum eine RAM ist, und einer globalen Speichereinheit (\emph{shared memory}).
+Jeder Prozessor besitzt einen lokalen Speicher und führt ein lokales Programm aus.
+Da sich die Instruktionen, die in einer Zeiteinheit ausgeführt werden, grundsätzlich unterscheiden können, gibt es sowohl MIMD als auch SIMD PRAM.
+Die RAMs sind nicht direkt miteinander verbunden, verfügen jedoch über die Anweisungen \emph{global read(X,Y)} und \emph{global write(X,Y)}, mit denen Speicherblöcke aus bzw. in dem shared Memory kopiert werden können.
+Der Umfang der Kommunikation zwischen den Prozessoren ist die Menge an Daten, welche zwischen den lokalen und dem globalen Speicher übermittelt wird.
+Jedem Prozessor ist zusätzlich seine eigene Identität bekannt, so dass bedingte Anweisungen ermöglichen, Blöcke nur auf bestimmten Prozessoren auszuführen.
+Die Operationenkomplexität einer PRAM ist das Produkt aus der Anzahl der verwendeten Prozessoren und der Zeitkomplexität.
+\cite[S.9ff.]{jaja}
+
+
+\subsubsection{Zugriffsbeschränkungen}
+Für PRAM Modelle existieren verschiedene Beschränkungen in Bezug auf simultanen Zugriff auf den globalen Speicher.
+Die verschiedenen Modelle sind unterschiedlich mächtig. Sie lassen sich unter erhöhtem Ressourcenverbrauch jedoch gegenseitig simulieren.
+Im Folgenden sind die üblichen Variationen in aufsteigender Mächtigkeit aufgelistet.
+Bei der EREW PRAM kann ein Prozessor zur Zeit eine Speicherzelle auslesen (\emph{exclusive read}) und schreiben (\emph{exclusive write}).
+Die CREW lässt mehrere Prozessoren gleichzeitig aus der selben Speicherzelle lesen (\emph{concurrent read}), der Schreibzugriff ist jedoch auf einen Prozessor pro Zeiteinheit begrenzt.
+Die CRCW PRAM erlaubt sowohl simultanen Lesezugriff als auch simultanen Schreibzugriff (\emph{concurrent write}).
+Bei letzterem können Konflikte entstehen, wenn verschiedene Prozessoren versuchen, gleichzeitig in die selbe Speicherzelle zu schreiben. Diese werden durch verschiedene Subtypen behandelt werden.
+Die \emph{common CRCW} lässt einen gleichzeitigen Schreibzugriff nur zu, falls alle beteiligten Prozessoren den gleichen Wert schreiben.
+Beim \emph{arbitrary CRCW} schreibt ein beliebiger Prozessor in die Speicherzelle.
+Die \emph{priority CRCW} gibt dem beteiligten Prozessor mit der höchsten Priorität (z.\,B. mit der niedrigsten ID) den Schreibzugriff.
+Bei der Entwicklung von Algorithmen muss auf die Eigenschaften der verwendeten PRAM eingegangen werden. Beispielsweise darf es bei einem arbitrary CRCW keine Rolle spielen, welcher der Prozessoren in einem Schritt den Schreibzugriff bekommt.
+\cite[S.14f.]{jaja}
