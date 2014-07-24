@@ -1,15 +1,21 @@
 \section{Analyse paralleler Algorithmen}
 
-\subsection{Optimal und effizient}
-Die $work$ eines parallelen Algorithmus kann nie geringer sein, als die des sequentiellen Algorithmus.
-
-Ein paralleler Algorithmus ist (asymptotisch) optimal, wenn für einen konstanten Faktor $c$ gilt
-\begin{equation}
-    work_p \cdot c = work_s \text{ .}
-\end{equation}
-
-
-\paragraph{rescheduling principle}
-
-
-\subsection{Die Klasse NC}
+\subsection{Die Klasse $NC$}
+Nicht alle Probleme in $P$ sind auch parallelisierbar.
+Die Klasse $NC$ (Nick's class, nach Nick Pippenger) enthält die effizient parallel
+entscheidbaren Probleme enthalten.
+\begin{define}
+    NC: \\
+    Die Komplexitätsklasse NC ist die Menge der Sprachen $L$,
+    die mit einer Eingabe der Länge $n$ durch einen Algorithmus
+    in $\mathcal{O}\left( \log^k n \right)$ Zeit auf einer PRAM
+    mit $\mathcal{O}\left( n^c \right)$ Prozessoren entschieden werden können.
+    $k$ und $c$ sind von $n$ unabhängige Konstanten.
+\end{define}
+Dass $NC \subseteq P$ gilt, kann gezeigt werden, da jeder Algorithmus auf einer PRAM
+einfach in einen sequentiellen Algorithmus umgeformt werden kann.
+Ähnlich zu der Beziehung zwischen den Klassen $P$ und $NP$, ist nicht bekannt,
+ob auch $P \subseteq NC$ und damit $NC = P$ gilt.
+Analog zu den $NP$-vollständigen Problemen, existiert die Klasse der $P$-vollständigen Probleme in $P$.
+Es wird vermutet, dass die $P$-vollständigen Probleme nicht in $NC$ enthalten sind.
+\cite[S.535]{jaja}
