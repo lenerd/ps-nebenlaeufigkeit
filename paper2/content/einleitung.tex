@@ -1,6 +1,29 @@
 \section{Einleitung}
 
 \subsection{Motivation}
+Computer werden immer leistungsfähiger.
+Bis zur Mitte des ersten Jahrzehnts nach der Jahrtausendwende stieg der
+Prozessortakt kontinuierlich an und die Ausführung einzelner Instruktionen
+wurde optimiert.
+Allerdings stagniert der Trend seitdem.
+Es sind physikalische Limits erreicht; ein weiterer Anstieg kann nur noch
+mit hohem Energieverbrauch und viel Abwärme erkauft werden.
+Der Nutzen wird einschränkt.
+Die Aussagen bedeuten jedoch nicht, dass moderne Prozessoren nicht effizienter
+sein können.
+Die Multicore-Architekturen setzen mehrere Prozessoren auf einem Chip ein,
+zudem wird Hyper-Threading standardmäßig genutzt.
+Aber läuft ein Programm auch viermal so schnell, wenn man es auf einer Maschine
+mit Dualcore Prozessor einsetzt?
+Im Gegensatz zur Erhöhung der Taktfrequenz, kann Software nicht einfach mehrere
+Kerne verwenden.
+Wie Herb Sutter in seinem Artikel „The Free Lunch Is Over“
+\cite{sutterlunch} beschreibt, ist es heute notwendig, die Programme anzupassen
+und es auszunutzen, dass nebenläufige Ausführung möglich ist.
+Man kann nicht mehr darauf vertrauen, dass die Software mit jeder Generation
+von Prozessoren schneller läuft.
+Die Algorithmen müssen angepasst und parallelisiert werden, falls möglich, um
+eine effiziente Auslastung von modernen Computer zu gewährleisten.
 
 \subsection{Begriffe}
 Zum Verständnis werden im Folgenden einige Begriffe eingeführt.
