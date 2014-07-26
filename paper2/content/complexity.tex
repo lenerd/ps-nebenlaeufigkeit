@@ -1,6 +1,16 @@
 \section{Analyse paralleler Algorithmen}
 
 \subsection{Die Klasse $NC$}
+\begin{define}
+    P: \\
+    Die Klasse $P$ ist die Menge aller Probleme, die in polynomieller Zeit entschieden werden können.
+    \begin{equation}
+        \begin{split}
+            P = \left\{ L \, | \, \text{Es gibt ein Polynom } p\colon \mathbb{N} \to \mathbb{R} \right.
+            \text{ und eine} \\ \left. \text{$p(n)$-zeitbeschränkte $DTM$ $A$ mit } L = L(A) \right\}
+        \end{split}
+    \end{equation}\cite[S.205]{fgi1}
+\end{define}
 Nicht alle Probleme in $P$ sind auch parallelisierbar.
 Die Klasse $NC$ (Nick's class, nach Nick Pippenger) enthält die effizient parallel
 entscheidbaren Probleme enthalten.
@@ -19,3 +29,5 @@ ob auch $P \subseteq NC$ und damit $NC = P$ gilt.
 Analog zu den $NP$-vollständigen Problemen, existiert die Klasse der $P$-vollständigen Probleme in $P$.
 Es wird vermutet, dass die $P$-vollständigen Probleme nicht in $NC$ enthalten sind.
 \cite[S.535]{jaja}
+
+\subsection{P-vollständige Probleme}
