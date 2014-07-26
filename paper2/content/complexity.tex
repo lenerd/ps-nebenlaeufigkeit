@@ -3,7 +3,8 @@
 \subsection{Die Klasse $NC$}
 \begin{define}
     P: \\
-    Die Klasse $P$ ist die Menge aller Probleme, die sequentiell in polynomieller Zeit $\mathcal{O}(n^k)$ ($k$ konstant) entschieden werden können.
+    Die Klasse $P$ ist die Menge aller Probleme, die sequentiell in 
+    polynomieller Zeit $\mathcal{O}(n^k)$ ($k$ konstant) entschieden werden können.
     \begin{equation}
         \begin{split}
             P = \left\{ L \, | \, \text{Es gibt ein Polynom } p\colon \mathbb{N} \to \mathbb{R} \right.
@@ -16,11 +17,14 @@ Die Klasse $NC$ (Nick's class, nach Nick Pippenger) enthält die effizient paral
 entscheidbaren Probleme enthalten.
 \begin{define}
     NC: \\
-    Die Komplexitätsklasse NC ist die Menge der Sprachen $L$,
-    die mit einer Eingabe der Länge $n$ durch einen Algorithmus
-    in $\mathcal{O}\left( \log^k n \right)$ Zeit auf einer PRAM
-    mit $\mathcal{O}\left( n^c \right)$ Prozessoren entschieden werden können.
-    $k$ und $c$ sind von $n$ unabhängige Konstanten.
+    Die Klasse $NC$ ist die Menge aller Probleme, die parallel in
+    polylogarithmischer Zeit $t(n) = \mathcal{O}(\log^k n)$ auf polynomiell
+    vielen Prozessoren $p(n) = \mathcal{O}(n^c)$ entschieden werden können.
+    \cite[S.44]{greenlaw}
+    % die mit einer Eingabe der Länge $n$ durch einen Algorithmus
+    % in $\mathcal{O}\left( \log^k n \right)$ Zeit auf einer PRAM
+    % mit $\mathcal{O}\left( n^c \right)$ Prozessoren entschieden werden können.
+    % $k$ und $c$ sind von $n$ unabhängige Konstanten.
 \end{define}
 Dass $NC \subseteq P$ gilt, kann gezeigt werden, da jeder Algorithmus auf einer PRAM
 einfach in einen sequentiellen Algorithmus umgeformt werden kann.
