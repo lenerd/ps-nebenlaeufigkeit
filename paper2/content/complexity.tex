@@ -82,10 +82,26 @@ Das Entscheiden von $L$ durch Reduktion auf $M$ ist also nicht wesentlich
 schwieriger als $M$.
 In diesem Fall wurde gezeigt, dass auch $L \in P$ gilt.
 
-Ähnlich zu der Beziehung zwischen den Klassen $P$ und $NP$, ist nicht bekannt,
-ob auch $P \subseteq NC$ und damit $NC = P$ gilt.
-Analog zu den $NP$-vollständigen Problemen, existiert die Klasse der $P$-vollständigen Probleme in $P$.
-Es wird vermutet, dass die $P$-vollständigen Probleme nicht in $NC$ enthalten sind.
+\begin{define}
+    Ein Problem $L$ in $P$-schwierig bezüglich $NC$, wenn jedes andere Problem
+    in $P$ $NC$-many-one-reduzierbar auf $L$ ist. \\
+    Ein Problem $L$ ist $P$-vollständig bezüglich $NC$, wenn $L \in P$ und $L$
+    $P$-schwierig bezüglich $NC$ ist.
+\end{define}
+Im folgenden wird vom Bezug auf die Klasse $NC$ ausgegangen, wenn von
+$P$-schwierigen oder $P$-vollständigen Problemen gesprochen wird.
+%
+Nach Definition sind die $P$-vollständigen Probleme, die schwersten in $P$.
+Da sich alle diese Probleme aufeinander reduzieren lassen, wäre nur ein highly
+parallel Algorithmus für ein einziges Problem dieser Klasse notwendig, um
+$NC = P$ zu zeigen.
+Bisher ist dies jedoch noch niemandem gelungen.
+Man vermutet daher, dass analog zu den $NP$-vollständigen Problemen gilt
+\begin{equation}
+    \left\{ L \, | \, L \text{ ist $P$-vollständig} \right\} \subseteq P \backslash NC
+\end{equation}
+Die $P$-vollständigen Probleme sind somit die wahrscheinlichsten Kandidaten
+für inherent sequentielle Probleme.
 \cite[S.54ff]{greenlaw}\cite[S.535]{jaja}
 
 \subsection{P-vollständige Probleme}
