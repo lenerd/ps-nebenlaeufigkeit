@@ -12,9 +12,11 @@
         \end{split}
     \end{equation}\cite[S.205]{fgi1}\cite[S.44]{greenlaw}
 \end{define}
-Nicht alle Probleme in $P$ sind auch parallelisierbar.
-Die Klasse $NC$ (Nick's class, nach Nick Pippenger) enthält die effizient parallel
-entscheidbaren Probleme enthalten.
+Probleme werden als effizient parallel entscheidbar bezeichnet, wenn das
+hinzunehmen von weiteren Prozessoren eine signifikante Verbesserung der
+Laufzeit mit sich bringt.
+Diese auch als \emph{highly parallel} bezeichneten Probleme werden in der
+Komplexitätsklasse $NC$ (Nick's class, nach Nick Pippenger) zusammengefasst.
 \begin{define}
     NC: \\
     Die Klasse $NC$ ist die Menge aller Probleme, die parallel in
@@ -26,8 +28,19 @@ entscheidbaren Probleme enthalten.
     % mit $\mathcal{O}\left( n^c \right)$ Prozessoren entschieden werden können.
     % $k$ und $c$ sind von $n$ unabhängige Konstanten.
 \end{define}
-Dass $NC \subseteq P$ gilt, kann gezeigt werden, da jeder Algorithmus auf einer PRAM
-einfach in einen sequentiellen Algorithmus umgeformt werden kann.
+
+\begin{lemma}
+    Ein Problem ist genau dann sequentiell in polynomieller Zeit entscheidbar,
+    wenn es parallel in polynomieller Zeit auf polynomiell vielen Prozessoren
+    entscheidbar ist.\cite[S.44]{greenlaw}
+    \label{seqiffpar}
+\end{lemma}
+Ein sequentieller Algorithmus kann auf einer PRAM mit einem Prozessor in der
+gleichen Zeit laufen.
+Eine RAM kann eine PRAM simulieren, indem die ursprünglich parallel
+ausgeführten Instruktionen, nacheinander ausgeführt werden.
+$NC \subseteq P$ gilt also aufgrund von Lemma \ref{seqiffpar}.
+
 Ähnlich zu der Beziehung zwischen den Klassen $P$ und $NP$, ist nicht bekannt,
 ob auch $P \subseteq NC$ und damit $NC = P$ gilt.
 Analog zu den $NP$-vollständigen Problemen, existiert die Klasse der $P$-vollständigen Probleme in $P$.
