@@ -35,6 +35,44 @@ Einfache Netzwerke sind etwas als lineare Graphen oder Kreisgraphen realisiert.
 In Gittergraphen oder Hyperwürfel verfügen die einzelnen Prozessoren über eine höhere Anzahl an Kommunikationsverbindungen.
 \cite[S.16f.]{jaja}
 
+\paragraph{Beispiel}
+Berechnung des Produktes $y = Ax$ aus einer $n \times n$-Matrix $A$ und einem
+Vektor $x$ mit der Länge $n$ auf einem Ring aus $p$ Prozessoren (Abb. \ref{ring}).
+$n$ sei ein vielfaches von $p$ mit $r = \frac{n}{p}$.
+Die Matrix $A$ wird in $p$ Spalten $A_i$ der Form $n \times r$,
+der Vektor $x$ in $p$ Abschnitte der Länge $r$ aufgeteilt.
+Die Prozessoren berechnen das Produkt $z_i = A_ix_i$.
+Die Summe aller $z_i$ ist der Ergebnisvektor $y = \sum_{i=1}^p z_i$.
+
+\begin{figure}
+    \centering
+    \input{content/images/ring.tex}
+    \caption{Netzwerk in Form eines Rings}
+    \label{ring}
+\end{figure}
+
+\begin{algorithm}
+    \caption{Asynchronous Matrix Vector Product on a Ring \cite[S.18]{jaja}}
+    \begin{algorithmic}[1]
+    \Require (1) Nummer des Prozessors $i$; (2) Anzahl der Prozessoren $p$;
+    (3) die $i$te Submatrix $B = A(1:n, (i-1)r+1:ir)$ der Größe $n \times r$ mit $r = \frac{n}{p}$;
+    (4) der $i$te Subvektor $w = x((i-1)r+1:ir)$ der Länge $r$
+    \Ensure Prozessor $P_i$ berechnet den Vektor $y = A_1x_1 + \cdots + A_ix_i$
+    und gibt das Ergebnis nach rechts. Bei Terminierung hat $P_1$ das Ergebnis $Ax$.
+    \State Berechne das Prudukt $z \gets Bw$
+    \If {$i = 1$}
+        \State $y \gets 0$
+    \Else
+        \State \textbf{receive}($y$, left)
+    \EndIf
+    \State $y \gets y + z$
+    \State \textbf{send}($y$, right)
+    \If {$i = 1$}
+        \State \textbf{receive}($y$, left)
+    \EndIf
+    \end{algorithmic}
+\end{algorithm}
+
 
 \subsection{Parallel Random Access Machine}
 Eine Parallel Random Access Machine, im folgenden PRAM, ist ein oft genutztes Maschinenmodell, um parallele Algorithmen zu analysieren.
