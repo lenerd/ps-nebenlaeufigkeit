@@ -47,11 +47,45 @@ gleichen Zeit laufen.
 Eine RAM kann eine PRAM simulieren, indem die ursprünglich parallel
 ausgeführten Instruktionen, nacheinander ausgeführt werden.
 $NC \subseteq P$ gilt also aufgrund von Lemma \ref{seqiffpar}.
+%
+Liegt ein Problem in $P$, ist also sequentiell in polynomieller Zeit
+entscheidbar, und es gibt keine Lösung, die in $NC$ liegt, so wird das
+Problem als \emph{inherently sequential} bezeichnet.
+Um zu entscheiden, ob $NC \neq P$ gilt, reicht es, für ein Problem aus $P$ zu
+zeigen, dass es nicht in $NC$ lösbar ist.
+Bisher ist jedoch noch kein Beweis bekannt.
+Die Situation ähnelt der Frage, ob $P \neq NP$ gilt.
+
+Um Relationen zwischen Problemen zu beschreiben, wird der Begriff der
+Reduktion eingeführt.
+Kann man ein Problem $L$ lösen, indem man es in ein anderes Problem $M$ umformt,
+für das man einen Algorithmus kennt, so ist $L$ auf $M$ reduzierbar.
+%
+\begin{define}
+    Eine Sprache $L$ heißt many-one-reduzierbar auf eine Sprache $M$
+    ($L \leq_m M$), wenn es eine Funktion $f$ gibt, so dass gilt
+    \begin{equation}
+        x \in L \Leftrightarrow f(x) \in M
+    \end{equation}
+    $L$ ist $P$-many-one-reduzierbar auf $M$ ($L \leq_m^p M$), wenn $f \in FP$. \\
+    $L$ ist $NC$-many-one-reduzierbar auf $M$ ($L \leq_m^{NC} M$), wenn $f \in FNC$.
+    \cite[S.47]{greenlaw}
+\end{define}
+%
+Man kann also sagen, wenn $L \leq_m M$ gilt, ist $L$ höchstens so schwer zu
+lösen ist wie $M$.
+Der durch die Reduktionsfunktion $f$ entstandene Overhead kann je nach Zweck
+vernachlässigt werden.
+Gelten $f \in FP$ und $M \in P$, so hat der Algorithmus, der $L$ mithilfe von
+$M$ löst, eine polynomielle Laufzeit.
+Das Entscheiden von $L$ durch Reduktion auf $M$ ist also nicht wesentlich
+schwieriger als $M$.
+In diesem Fall wurde gezeigt, dass auch $L \in P$ gilt.
 
 Ähnlich zu der Beziehung zwischen den Klassen $P$ und $NP$, ist nicht bekannt,
 ob auch $P \subseteq NC$ und damit $NC = P$ gilt.
 Analog zu den $NP$-vollständigen Problemen, existiert die Klasse der $P$-vollständigen Probleme in $P$.
 Es wird vermutet, dass die $P$-vollständigen Probleme nicht in $NC$ enthalten sind.
-\cite[S.535]{jaja}
+\cite[S.54ff]{greenlaw}\cite[S.535]{jaja}
 
 \subsection{P-vollständige Probleme}
