@@ -17,11 +17,21 @@ Die Blätter entsprechen den Eingabevariablen.
 Die restlichen Knoten sind mit den Operationen der entsprechenden Variablenzuweisung beschriftet und haben eintreffende Kanten ausgehend von den Abhängigkeiten der Zuweisung.
 \cite[S.7]{jaja}\cite[S.11f.]{reif}
 
+\paragraph{Beispiel}
+Zwei verschiedene Ansätze, die Summe aus acht Zahlen zu bilden, sind in
+Abbildung \ref{circuit} dargestellt.
+Circuit $A$ berechnet alle sieben Präfixsummen, addiert alle acht Zahlen
+nacheinander.
+$A$ besitzt eine Zeitkomplexität von $time = 7$.
+$B$ hingegen berechnet Teilsummen parallel.
+Der Baum ist flacher, der Algorithmus hat eine Zeitkomplexität von $time = 3$.
+
 \begin{figure}
     \centering
     \input{content/images/circuit.tex}
     \caption{
         Zwei Circuits: Beide berechnen die Summe aus den Zahlen $A_1$ bis $A_8$.
+        \cite[S.8]{jaja}
     }
     \label{circuit}
 \end{figure}

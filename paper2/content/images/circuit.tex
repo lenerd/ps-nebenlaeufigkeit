@@ -1,4 +1,4 @@
-% TODO comment
+% two circuits computing the sum of eight numbers
 \begin{tikzpicture}
     [
         vertex/.style={circle, draw, scale=1, minimum size=3ex,},
@@ -35,6 +35,8 @@
     \draw [edge] (p4) -- (p6);
     \draw [edge] (p5) -- (p7);
     \draw [edge] (p6) -- (p7);
+
+    \node at (5,5) {$B$};
 
     % sequential dag
     \node (b1) at (-3,0)    [vertex] {$A_1$};
@@ -74,4 +76,6 @@
     \draw [edge] (q4) -- (q5);
     \draw [edge] (q5) -- (q6);
     \draw [edge] (q6) -- (q7);
+
+    \node at (-2,5) {$A$};
 \end{tikzpicture}         
