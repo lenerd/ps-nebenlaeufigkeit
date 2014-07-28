@@ -1,0 +1,103 @@
+\subsection{Die Klasse $NC$}
+\begin{define}
+    Die Klasse $P$ ist die Menge aller Probleme, die sequentiell in 
+    polynomieller Zeit $\mathcal{O}(n^k)$ ($k$ konstant) entschieden werden können.
+    \begin{equation}
+        \begin{split}
+            P = \left\{ L \, | \, \text{Es gibt ein Polynom } p\colon \mathbb{N} \to \mathbb{R} \right.
+            \text{ und eine} \\ \left. \text{$p(n)$-zeitbeschränkte $DTM$ $A$ mit } L = L(A) \right\}
+        \end{split}
+    \end{equation}
+    $FP$ sei die Menge aller Funktionen, die sequentiell in polynomieller Zeit
+    berechnet werden können.
+    \cite[S.205]{fgi1}\cite[S.44f]{greenlaw}
+\end{define}
+%
+Probleme werden als effizient parallel entscheidbar bezeichnet, wenn das
+hinzunehmen von weiteren Prozessoren eine signifikante Verbesserung der
+Laufzeit mit sich bringt.
+Diese auch als \emph{highly parallel} bezeichneten Probleme werden in der
+Komplexitätsklasse $NC$ (Nick's class, nach Nick Pippenger) zusammengefasst.
+%
+\begin{define}
+    Die Klasse $NC$ ist die Menge aller Probleme, die parallel in
+    polylogarithmischer Zeit $t(n) = \mathcal{O}(\log^k n)$ auf polynomiell
+    vielen Prozessoren $p(n) = \mathcal{O}(n^c)$ entschieden werden können.
+    Analog zu $P$ und $FP$ sei $FNC$ die Menge aller Funktionen, die in
+    polylogarithmischer Zeit auf polynomiell vielen Prozessoren berechnet
+    werden können.
+    \cite[S.44f]{greenlaw}
+    % die mit einer Eingabe der Länge $n$ durch einen Algorithmus
+    % in $\mathcal{O}\left( \log^k n \right)$ Zeit auf einer PRAM
+    % mit $\mathcal{O}\left( n^c \right)$ Prozessoren entschieden werden können.
+    % $k$ und $c$ sind von $n$ unabhängige Konstanten.
+\end{define}
+%
+\begin{lemma}
+    Ein Problem ist genau dann sequentiell in polynomieller Zeit entscheidbar,
+    wenn es parallel in polynomieller Zeit auf polynomiell vielen Prozessoren
+    entscheidbar ist.\cite[S.44]{greenlaw}
+    \label{seqiffpar}
+\end{lemma}
+%
+Ein sequentieller Algorithmus kann auf einer PRAM mit einem Prozessor in der
+gleichen Zeit laufen.
+Eine RAM kann eine PRAM simulieren, indem die ursprünglich parallel
+ausgeführten Instruktionen, nacheinander ausgeführt werden.
+$NC \subseteq P$ gilt also aufgrund von Lemma \ref{seqiffpar}.
+%
+Liegt ein Problem in $P$, ist also sequentiell in polynomieller Zeit
+entscheidbar, und es gibt keine Lösung, die in $NC$ liegt, so wird das
+Problem als \emph{inherently sequential} bezeichnet.
+Um zu entscheiden, ob $NC \neq P$ gilt, reicht es, für ein Problem aus $P$ zu
+zeigen, dass es nicht in $NC$ lösbar ist.
+Bisher ist jedoch noch kein Beweis bekannt.
+Die Situation ähnelt der Frage, ob $P \neq NP$ gilt.
+
+Um Relationen zwischen Problemen zu beschreiben, wird der Begriff der
+Reduktion eingeführt.
+Kann man ein Problem $L$ lösen, indem man es in ein anderes Problem $M$ umformt,
+für das man einen Algorithmus kennt, so ist $L$ auf $M$ reduzierbar.
+%
+\begin{define}
+    Eine Sprache $L$ heißt many-one-reduzierbar auf eine Sprache $M$
+    ($L \leq_m M$), wenn es eine Funktion $f$ gibt, so dass gilt
+    \begin{equation}
+        x \in L \Leftrightarrow f(x) \in M
+    \end{equation}
+    $L$ ist $P$-many-one-reduzierbar auf $M$ ($L \leq_m^p M$), wenn $f \in FP$. \\
+    $L$ ist $NC$-many-one-reduzierbar auf $M$ ($L \leq_m^{NC} M$), wenn $f \in FNC$.
+    \cite[S.47]{greenlaw}
+\end{define}
+%
+Man kann also sagen, wenn $L \leq_m M$ gilt, ist $L$ höchstens so schwer zu
+lösen ist wie $M$.
+Der durch die Reduktionsfunktion $f$ entstandene Overhead kann je nach Zweck
+vernachlässigt werden.
+Gelten $f \in FP$ und $M \in P$, so hat der Algorithmus, der $L$ mithilfe von
+$M$ löst, eine polynomielle Laufzeit.
+Das Entscheiden von $L$ durch Reduktion auf $M$ ist also nicht wesentlich
+schwieriger als $M$.
+In diesem Fall wurde gezeigt, dass auch $L \in P$ gilt.
+
+\begin{define}
+    Ein Problem $L$ in $P$-schwierig bezüglich $NC$, wenn jedes andere Problem
+    in $P$ $NC$-many-one-reduzierbar auf $L$ ist. \\
+    Ein Problem $L$ ist $P$-vollständig bezüglich $NC$, wenn $L \in P$ und $L$
+    $P$-schwierig bezüglich $NC$ ist.
+\end{define}
+Im folgenden wird vom Bezug auf die Klasse $NC$ ausgegangen, wenn von
+$P$-schwierigen oder $P$-vollständigen Problemen gesprochen wird.
+%
+Nach Definition sind die $P$-vollständigen Probleme, die schwersten in $P$.
+Da sich alle diese Probleme aufeinander reduzieren lassen, wäre nur ein highly
+parallel Algorithmus für ein einziges Problem dieser Klasse notwendig, um
+$NC = P$ zu zeigen.
+Bisher ist dies jedoch noch niemandem gelungen.
+Man vermutet daher, dass analog zu den $NP$-vollständigen Problemen gilt
+\begin{equation}
+    \left\{ L \, | \, L \text{ ist $P$-vollständig} \right\} \subseteq P \backslash NC
+\end{equation}
+Die $P$-vollständigen Probleme sind somit die wahrscheinlichsten Kandidaten
+für inherent sequentielle Probleme.
+\cite[S.54ff]{greenlaw}\cite[S.535]{jaja}

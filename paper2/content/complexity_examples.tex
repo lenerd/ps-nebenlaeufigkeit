@@ -1,0 +1,165 @@
+\subsection{P-vollständige Probleme}
+
+\subsubsection{Bekannte $P$-vollständige Probleme} \hfill \\
+In diesem Abschnitt werden Probleme vorgestellt, für die es einen Beweis gibt,
+dass sie $P$-vollständig sind.
+
+Das übliche Modell für die Berechnung sequentieller Probleme ist die
+Turingmaschine.
+In der Praxis eingesetzte Systeme ähneln zwar mehr einer RAM, sind jedoch
+genauso mächtig.
+Die Gemeinsamkeit ist der einzelne Prozessor, der eine Anweisung zur Zeit
+verarbeitet bzw. im Fall der Turingmaschine einen Zustandswechsel nach dem
+anderen ausführt.
+Ist ein Problem inherent sequentiell, so bedeutet es nicht anderes, als dass es
+auf einer PRAM oder einem vergleichbaren parallelen Modell nicht wesentlich
+schneller lösbar ist als auf einer Turingmaschine.
+Eine Turingmaschine zu simulieren ist also ein ideales sequentielles Problem.
+
+% Generic Machine Simulation Problem
+\begin{problem}
+    Generic Machine Simulation Problem ($GMSP$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item einen String $x$
+        \item eine kodierte Beschreibung $\overline{M}$ eine Turingmaschine $M$
+        \item einen Integer $t$ in Unärdarstellung
+    \end{itemize}
+    Der Eingabestring ist $x\#\overline{M}\#1^t$ mit $\#$ als Trennzeichen. \\
+    %
+    \textbf{Problem}: \\
+    Akzeptiert $M$ die Eingabe $x$ in $t$ Schritten?
+    \cite[S.215]{greenlaw}
+\end{problem}
+Dass $GMSP$ in $P$ liegt, ist einfach zu sehen:
+Die Simulation kann durch eine universelle Turingmaschine $M_{GMSP}$
+durchgeführt werden.
+Die Turingmaschine wird Schritt für Schritt mit der Eingabe simuliert, bis sie
+entweder akzeptiert oder $t$ Schritte simuliert worden sind.
+Im ersten Fall wird akzeptiert, im zweiten wird nicht akzeptiert.
+$M_{GMSP}$ entscheidet $GMSP$.
+Dass $GMSP$ $P$-schwierig ist kann ebenfalls gezeigt werden.
+Sei $L$ eine beliebige Sprache für die gelte $L \in P$.
+Dann gibt es eine Turingmaschine $M_L$ mit $L = L(M_L)$.
+Man berechne eine obere Grenze $p(n) = \mathcal{O}(n^k)$ ($k$ fest) für die
+Zeitkomplexität von $M_L$ auf einer Eingabe der Länge $n$.
+$M_{GMSP}$ erhält $M_L$, einen String $x$ und ein das Zeitlimit abhängig von der
+Länge des Strings als Eingabe: $x\#\overline{M_L}\#1^{p(|x|)}$.
+$L$ enthält $x$ genau dann, wenn $M_{GMSP}$ die Eingabe akzeptiert.
+Da $GMSP$ in $P$ liegt und $P$-schwierig ist, ist es auch $P$-vollständig.
+\cite[S.57ff]{greenlaw}
+
+
+% circuit value problem
+\begin{problem}
+    Circuit Value Problem ($CVP$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item eine kodierte Beschreibung $\overline{\alpha}$ eines
+            boolean Circuit $\alpha$
+        \item Eingänge $x_1, \ldots, x_n$
+        \item einen Ausgang $y$
+    \end{itemize}
+    \textbf{Problem}: \\
+    Ist der Ausgang $y$ wahr unter der Eingabe $x_1, \ldots, x_n$?
+\end{problem}
+
+Das Circuit Value Problem ist ein weiteres zentrales $P$-vollständiges Problem.
+Zur Lösung müssen alle Knoten von den Eingaben zu den Ausgaben durchlaufen
+werden.
+An jedem Knoten wird die jeweilige Operation über den schon vorhandenen Werten
+ausgeführt, bis der Ausgang $y$ berechnet ist.
+Dies ist ohne weiteres in polynomieller Zeit möglich, $CVP \in P$.
+Wenn man zeigen möchte, dass alle Probleme in $P$ auf $CVP$ reduzierbar sind,
+kann man wie folgt überlegen:
+Für jedes Problem $L \in P$ gibt es einen Algorithmus auf einer Turingmaschine.
+Alle verwendeten Digitalrechner sind ebenso mächtig und bestehen aus digitalen
+Schaltkreisen.
+Diese können wiederum als boolean Circuit angesehen werden.
+Es ist möglich eine Turingmaschine durch Circuits zu simulieren, indem der
+genaue Zustand in jedem Schritt berechnet wird. \cite[S.59f,71f]{greenlaw}
+Für einen kompletten Beweis sei auf Greenlaw, Hoover und Ruzzo \cite[Kapitel 6]{greenlaw}
+verwiesen.
+Mithilfe von Reduktionen des $CVP$ und verwandter Probleme lassen sich die
+$P$-Vollständigkeiten vieler anderer Probleme beweisen.
+
+% Game of Life
+\begin{problem}
+    Game of Life ($LIFE$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item eine Ausgangskonfiguration des Feldes
+        \item eine Zeitangabe $t$
+        \item eine Zelle $c$ auf dem Spielfeld
+    \end{itemize}
+    Das Spielfeld ist ein zweidimensionales Gitter und in beiden Dimensionen
+    unendlich groß.
+    Jede Zelle ist entweder tot oder lebendig und hat acht Nachbarzellen.
+    Eine Zelle, die am Zeitpunkt $t$ tot ist, ist bei $t+1$ lebendig,
+    wenn sie zur Zeit $t$ genau drei lebende Nachbarzellen hat.
+    Eine bei $t$ lebende Zelle bleibt in $t+1$ lebendig, wenn sie bei $t$ zwei
+    oder drei lebendige Nachbarzellen hat; andernfalls stirbt sie. \\
+    %
+    \textbf{Problem}: \\
+    Ist die Zelle $c$ nach der Zeit $t$ am Leben?
+    \cite[S.211]{greenlaw}
+\end{problem}
+
+% Unification
+\begin{problem}
+    Unifikation ($UNIF$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item zwei Terme $s$ und $t$: Jeder Term besteht aus Variablen und
+            Funktionssymbolen.
+    \end{itemize}
+    Eine Substitution für eine Variable $x$ in einem Term $u$ ersetzt alle
+    Vorkommen von $x$ in $u$ durch einen weiteren Term $v$. \\
+    %
+    \textbf{Problem}: \\
+    Existiert eine Folge von Substitutionen $\sigma$, die $s$ und $t$
+    unifiziert?
+    Zwei Terme sind unifizierbar, wenn es ein $\sigma$ gibt, so dass
+    $\sigma(s) = \sigma(t)$ gilt.
+    \cite[S.171]{greenlaw}
+\end{problem}
+
+\subsubsection{Probleme mit unbekannter Komplexität} \hfill \\
+Für folgende Probleme gibt es bisher weder einen Algorithmus in $NC$,
+noch einen Beweis, dass sie $P$-vollständig sind.
+
+% Integer GCD
+\begin{problem}
+    Größter gemeinsamer Teiler ($IntegerGCD$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item zwei positive $n$-bit Integer $a$ und $b$
+    \end{itemize}
+    \textbf{Problem}: \\
+    Berechne den größten gemeinsamen Teiler von $a$ und $b$ ($\gcd(a,b)$).
+    \cite[S.229]{greenlaw}
+\end{problem}
+
+% Extened GCD
+\begin{problem}
+    Erweiterter Euklidischer Algorithmus ($ExtendedGCD$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item zwei positive $n$-bit Integer $a$ und $b$
+    \end{itemize}
+    \textbf{Problem}: \\
+    Berechne zwei Integer $s$ und $t$, so dass $as + bt = \gcd(a,b)$ gilt.
+    \cite[S.229]{greenlaw}
+\end{problem}
+
+% ModPower
+\begin{problem}
+    Diskrete Exponentialfunktion ($ModPower$) \\
+    \textbf{Eingabe}:
+    \begin{itemize}
+        \item positive $n$-bit Integer $a$, $b$ und $c$
+    \end{itemize}
+    \textbf{Problem}: \\
+    Berechne $a^b \mod c$.
+    \cite[S.231]{greenlaw}
+\end{problem}
