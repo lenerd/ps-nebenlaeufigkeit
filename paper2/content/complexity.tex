@@ -171,6 +171,25 @@ Da $GMSP$ in $P$ liegt und $P$-schwierig ist, ist es auch $P$-vollständig.
     Ist der Ausgang $y$ wahr unter der Eingabe $x_1, \ldots, x_n$?
 \end{problem}
 
+Das Circuit Value Problem ist ein weiteres zentrales $P$-vollständiges Problem.
+Zur Lösung müssen alle Knoten von den Eingaben zu den Ausgaben durchlaufen
+werden.
+An jedem Knoten wird die jeweilige Operation über den schon vorhandenen Werten
+ausgeführt, bis der Ausgang $y$ berechnet ist.
+Dies ist ohne weiteres in polynomieller Zeit möglich, $CVP \in P$.
+Wenn man zeigen möchte, dass alle Probleme in $P$ auf $CVP$ reduzierbar sind,
+kann man wie folgt überlegen:
+Für jedes Problem $L \in P$ gibt es einen Algorithmus auf einer Turingmaschine.
+Alle verwendeten Digitalrechner sind ebenso mächtig und bestehen aus digitalen
+Schaltkreisen.
+Diese können wiederum als boolean Circuit angesehen werden.
+Es ist möglich eine Turingmaschine durch Circuits zu simulieren, indem der
+genaue Zustand in jedem Schritt berechnet wird. \cite[S.59f,71f]{greenlaw}
+Für einen kompletten Beweis sei auf Greenlaw, Hoover und Ruzzo \cite[Kapitel 6]{greenlaw}
+verwiesen.
+Mithilfe von Reduktionen des $CVP$ und verwandter Probleme lassen sich die
+$P$-Vollständigkeiten vieler anderer Probleme beweisen.
+
 % Game of Life
 \begin{problem}
     Game of Life ($LIFE$) \\
