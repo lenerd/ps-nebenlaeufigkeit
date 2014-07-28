@@ -30,14 +30,24 @@ Es werden theoretische Modelle vorgestellt, anhand derer Algorithmen analysiert
 werden können, und es wird auf die Frage eingegangen, welche Probleme überhaupt
 parallel gelöst werden können.
 
-\subsection{Begriffe}
-Zum Verständnis werden im Folgenden einige Begriffe eingeführt.
+\subsection{Aufbau}
+In den ersten beiden Abschnitten werden abstrakte Modelle vorgestellt, anhand
+derer sequentielle und parallele Algorithmen betrachtet werden können.
+Kapitel 4 behandelt die Komplexitätsklassen der beobachteten Algorithmen.
+Es wird darauf eingegangen, welche Probleme sich überhaupt effizient parallel
+gelöst werden können.
 
-\paragraph{Zeitkomplexität}
-Die Ausführungszeit eines Algorithmus wird mit der Anzahl der ausgeführten Instruktionen angegeben.
-
-\paragraph{Platzkomplexität}
-Der Speicherbedarf ist die Menge an Variablen, in denen Werte während der Ausführung zwischengespeichert werden.
-
-\paragraph{Operationenkomplexität}
-Die Summe aller ausgeführten Operationen eines Algorithmus. Bei sequentiellen Algorithmen entspricht diese der Zeitkomplexität.
+Im Laufe des Textes werden verschiedene Angaben für Komplexität verwendet.
+Dabei wird ein uniformes Komplexitätsmaß verwendet.
+Die Menge an verwendeten Variablen, in denen Werte während der Ausführung
+zwischengespeichert werden, ist die Platzkomplexität ($space$).
+Die Zeitkomplexität ($time$) eines Algorithmus gibt die Anzahl der
+Zeiteinheiten an, die zur Ausführung gebraucht werden.
+Eine Anweisung benötigt eine Zeiteinheit.
+Allerdings können insbesondere bei parallelen Algorithmen Anweisungen parallel
+ausgeführt werden.
+Die Zeitkomplexität entspricht daher nicht unbedingt der Anzahl ausgeführter
+Anweisungen ($work$).
+Diese wird auch als Operationenkomplexität bezeichnet.
+Des weiteren wird bei parallelen Algorithmen die Anzahl der verwendeten
+Prozessoren betrachtet.
