@@ -5,6 +5,12 @@
 \usepackage{lmodern}
 \usepackage[ngerman]{babel}
 
+\setcounter{tocdepth}{3}
+\makeatletter
+\renewcommand*\l@author[2]{}
+\renewcommand*\l@title[2]{}
+\makeatother
+
 \usepackage{amsmath, amsfonts}
 \spnewtheorem{define}{Definition}{\bfseries}{\rmfamily}
 \usepackage{algorithm}
@@ -41,6 +47,10 @@
 Wir stellen verschiedene Modelle für parallele Architekturen vor und gehen auf die verschiedenen Eigenschaften ein. Weiterhin wird auf Möglichkeiten eingegangen, Algorithmen zu paralelisieren.
 \keywords{parallele Algorithmen, PRAM, Sortieralgorithmen}
 \end{abstract}
+
+\tableofcontents
+
+\newpage
 
 \input{content/einleitung}
 \input{content/modelle_sequentiell}
