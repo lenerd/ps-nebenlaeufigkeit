@@ -1,0 +1,18 @@
+\subsection{Das Schedulingprinzip}
+Gegeben sei ein Problem welches durch einen parallelen Algorithmus gelöst wird.
+Sei $W_i(n)$ die Anzahl der Operationen zu Zeit $i$ mit $1 \leq i \leq T(n)$.
+Eine Maschine mit $p$ Prozessoren simuliert nun die Menge von $W_i(n)$
+Operationen, die parallel im Schritt $i$ ausgeführt werden.
+Die Simulation läuft in einer Zeit von $< \lceil \frac{W_i(n)}{p} \rceil$
+parallel auf $p$ Prozessoren für jeden Zeitslot $i$.
+Ist die Simulation erfolgreich, hat der Algorithmus auf einer PRAM mit $p$
+Prozessoren hat der Algorithmus eine Laufzeit von
+$T_p(n) = \mathcal{O} \left( \frac{W(n)}{p} + T(n) \right)$
+\cite[S.28]{jaja}
+
+Während work die Anzahl ausgeführter Operationen bezeichnet, ist \emph{cost}
+abhängig von der Menge an Prozessoren, die zur Verfügung steht
+$C_p = T_p(n) \cdot p = \mathcal{O} (W(n) + T(n) \cdot p)$.
+Werden Prozessoren in Berechnungsschritten nicht genutzt so werden die freien
+Resourcen von work nicht berücksichtigt, con cost jedoch schon.
+Daher gilt immer $W(n) \leq C_p(n)$.
