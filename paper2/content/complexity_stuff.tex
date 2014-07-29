@@ -17,3 +17,44 @@ Werden Prozessoren in Berechnungsschritten nicht genutzt so werden die freien
 Ressourcen von work nicht berücksichtigt, von cost jedoch schon.
 Daher gilt immer $W(n) \leq C_p(n)$.
 \cite[S.31]{jaja}
+
+\subsection{Optimalität}
+Sei $L$ ein Problem mit der Zeitkomplexität $T^\ast(n)$.
+Es gibt einen sequentiellen Algorithmus, der $L$ in $\mathcal{O}(T^\ast(n))$
+entscheidet und es kann gezeigt werden, dass die Schranke nicht weiter
+verbessert werden kann.
+%
+\begin{define}
+    Ein sequentieller Algorithmus mit einer Laufzeit von
+    $\mathcal{O}(T^\ast(n))$ ist \emph{time optimal} für $L$.
+\end{define}
+%
+\begin{define}
+    Ein paralleler Algorithmus mit der Anzahl an Operationen $W(n)$ heißt
+    \emph{optimal}, wenn gilt $W(n) = \Theta(T^\ast(n))$.
+\end{define}
+%
+Die Größe $S_p(n) = \frac{T^\ast(n)}{T_p(n)} \leq p$ ist die Beschleunigung
+(\emph{speedup}), die ein Algorithmus auf $p$ Prozessoren im Gegensatz zu der
+sequentiellen Berechnung erfährt.
+Nach dem Schedulingprinzip kann ein optimaler Algorithmus mit der 
+Laufzeit $T(n)$ in der Zeit
+$T_p(n) = \mathcal{O} \left( \frac{T^\ast(n)}{p} + T(n) \right)$
+auf einer PRAM mit $p$ Prozessoren ausgeführt werden.
+Die Beschleunigung eines solchen Algorithmus ist
+\begin{equation}
+    S_p(n) = \Omega \left( \frac{T^\ast(n)}{\frac{T^\ast(n)}{p} + T(n)} \right)
+    = \Omega \left( \frac{pT^\ast(n)}{T^ast(n) + pT(n)} \right) \text{ .}
+\end{equation}
+Ein Algorithmus erreicht eine optimale Beschleunigung ($S_p(n) = \Theta(p)$),
+wenn gilt
+\begin{equation}
+    p = \mathcal{O} \left( \frac{T^\ast(n)}{T(n)} \right) \text{ .}
+\end{equation}
+%
+\begin{define}
+    Ein optimaler paralleler Algorithmus wird \emph{work-time optimal} genannt,
+    wenn gezeigt werden kann, dass kein anderer optimaler paralleler
+    Algorithmus existiert, der $T(n)$ verbessert.
+\end{define}
+\cite[S.3,32]{jaja}
