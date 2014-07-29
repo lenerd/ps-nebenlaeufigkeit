@@ -2,7 +2,8 @@
 %\documentclass[handout,xcolor=svgnames]{beamer}
 \documentclass[presentation,xcolor=svgnames]{beamer}
 
-\include{preface}
+\include{macros/preface}
+\include{macros/copyrightbox}
 
 %%% Hier persoenliche Einstellungen anpassen
 \title[Parallele Algorithmen]{Parallele Algorithmen}
@@ -37,6 +38,13 @@
 
 \maketitle
 
-\input{content/second}
+\input{content/toc.tex}
+\input{content/einleitung}
+%\input{content/modelle_sequentiell}
+\input{content/modelle_parallel}
+%\input{content/complexity}
+%\input{content/techniken}
+%\input{content/sort}
+%\input{content/end}
 
 \end{document}
