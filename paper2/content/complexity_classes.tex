@@ -1,11 +1,14 @@
 \subsection{Die Klasse $NC$}
 \begin{define}
     Die Klasse $P$ ist die Menge aller Probleme, die sequentiell in 
-    polynomieller Zeit $\mathcal{O}(n^k)$ ($k$ konstant) entschieden werden können.
+    polynomieller Zeit $\mathcal{O}(n^k)$ ($k$ konstant) entschieden werden
+    können.
     \begin{equation}
         \begin{split}
-            P = \left\{ L \, | \, \text{Es gibt ein Polynom } p\colon \mathbb{N} \to \mathbb{R} \right.
-            \text{ und eine} \\ \left. \text{$p(n)$-zeitbeschränkte $DTM$ $A$ mit } L = L(A) \right\}
+            P = \left\{ L \, | \, \text{Es gibt ein Polynom }
+            p\colon \mathbb{N} \to \mathbb{R} \right.
+            \text{ und eine} \\ \left. \text{$p(n)$-zeitbeschränkte $DTM$ $A$
+            mit } L = L(A) \right\}
         \end{split}
     \end{equation}
     $FP$ sei die Menge aller Funktionen, die sequentiell in polynomieller Zeit
@@ -27,10 +30,6 @@ Komplexitätsklasse $NC$ (Nick's class, nach Nick Pippenger) zusammengefasst.
     polylogarithmischer Zeit auf polynomiell vielen Prozessoren berechnet
     werden können.
     \cite[S.44f]{greenlaw}
-    % die mit einer Eingabe der Länge $n$ durch einen Algorithmus
-    % in $\mathcal{O}\left( \log^k n \right)$ Zeit auf einer PRAM
-    % mit $\mathcal{O}\left( n^c \right)$ Prozessoren entschieden werden können.
-    % $k$ und $c$ sind von $n$ unabhängige Konstanten.
 \end{define}
 %
 \begin{lemma}
@@ -65,8 +64,10 @@ für das man einen Algorithmus kennt, so ist $L$ auf $M$ reduzierbar.
     \begin{equation}
         x \in L \Leftrightarrow f(x) \in M
     \end{equation}
-    $L$ ist $P$-many-one-reduzierbar auf $M$ ($L \leq_m^p M$), wenn $f \in FP$. \\
-    $L$ ist $NC$-many-one-reduzierbar auf $M$ ($L \leq_m^{NC} M$), wenn $f \in FNC$.
+    $L$ ist $P$-many-one-reduzierbar auf $M$ ($L \leq_m^p M$), wenn
+    $f \in FP$. \\
+    $L$ ist $NC$-many-one-reduzierbar auf $M$ ($L \leq_m^{NC} M$), wenn
+    $f \in FNC$.
     \cite[S.47]{greenlaw}
 \end{define}
 %
@@ -96,7 +97,8 @@ $NC = P$ zu zeigen.
 Bisher ist dies jedoch noch niemandem gelungen.
 Man vermutet daher, dass analog zu den $NP$-vollständigen Problemen gilt
 \begin{equation}
-    \left\{ L \, | \, L \text{ ist $P$-vollständig} \right\} \subseteq P \backslash NC
+    \left\{ L \, | \, L \text{ ist $P$-vollständig} \right\}
+    \subseteq P \backslash NC
 \end{equation}
 Die $P$-vollständigen Probleme sind somit die wahrscheinlichsten Kandidaten
 für inherent sequentielle Probleme.
