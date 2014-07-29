@@ -1,0 +1,85 @@
+% -*- coding: utf-8 -*-
+% !TEX root = ../main.tex
+%UTF-8: äöüß
+%slides.tex
+
+\section{Gliederung}
+\label{sec:gliederung}
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}[allowframebreaks]
+    \frametitle{\insertsection}
+    \begin{itemize}
+        \item Abstract
+        \item Einleitung
+        \item Nebenläufigkeit vs. Parallelität
+        \item Modelle zur Analyse paralleler Algorithmen
+            \begin{itemize}
+                \item Network Model
+                    \begin{itemize}
+                        \item Array
+                        \item Matrix
+                        \item Hypercube
+                    \end{itemize}
+                \item PRAM
+                    \begin{itemize}
+                        \item EREW
+                        \item CREW
+                        \item common CRCW
+                        \item arbitrary CRCW
+                        \item priority CRCW
+                    \end{itemize}
+            \end{itemize}
+        \framebreak
+        \item Parallelrechner
+            \begin{itemize}
+                \item Massiv-parallele Computer
+                	\begin{itemize}
+                		\item Speicher-Synchronisation
+                	\end{itemize}
+                \item Pipelining
+            \end{itemize}
+        \item Parallelisierbarkeit
+            \begin{itemize}
+                \item Embarrassingly parallel problems
+                \item Inherently serial problems
+            \end{itemize}
+        \item Techniken
+            \begin{itemize}
+                \item Divide and Conquer
+                \item Partitionieren
+                \item Pointer jumping
+            \end{itemize}
+        \framebreak
+        \item Anwendung paralleler Algorithmen
+            \begin{itemize}
+                \item Allgemein
+                \item Sortieralgorithmen
+                    \begin{itemize}
+                        \item Quicksort
+                        \item Mergesort
+                        \item Beispiel Implementationen
+                    \end{itemize}
+            \end{itemize}
+        \item Zusammenfassung
+        \item Literatur
+    \end{itemize}
+%\nocite{JaJa92}
+\nocite{*}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}[allowframebreaks]
+\frametitle{Literatur}
+    \printbibliography   
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

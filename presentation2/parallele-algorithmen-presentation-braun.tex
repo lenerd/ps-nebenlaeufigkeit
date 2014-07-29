@@ -1,0 +1,42 @@
+\pdfminorversion=4
+%\documentclass[handout,xcolor=svgnames]{beamer}
+\documentclass[presentation,xcolor=svgnames]{beamer}
+
+\include{preface}
+
+%%% Hier persoenliche Einstellungen anpassen
+\title[Parallele Algorithmen]{Parallele Algorithmen}
+%\subtitle{Untertitel}
+
+\author[L. Braun]{Lennart Braun}
+
+\institute{Universität Hamburg\\ 
+  Fakultät für Mathematik, Informatik und Naturwissenschaften\\
+  Fachbereich Informatik, Arbeitsbereich TGI\\
+  Proseminar Nebenläufigkeit SS 14}
+
+\date{\today}
+
+% PDF Dokumentinformationen: autorenspezifisch
+\hypersetup {
+	pdfauthor={Lennart Braun},
+	pdftitle={\title},
+%	pdftitle = {\title -- \subtitle},
+	pdfsubject = {Universität Hamburg / MIN / FB18 / TGI / Proseminar Nebenläufigkeit / SS 14},
+	pdfkeywords = {Nebenläufigkeit, Concurrency},
+	plainpages = false, 
+	pdfstartpage = {1},
+	pdfpagelabels,
+    breaklinks = {true},
+}
+
+\usepackage{biblatex}
+\addbibresource{../parallele-algorithmen.bib}
+
+\begin{document}
+
+\maketitle
+
+\input{content/second}
+
+\end{document}
