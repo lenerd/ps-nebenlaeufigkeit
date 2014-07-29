@@ -1,0 +1,42 @@
+% by Thomas Fischer
+% http://t-fischer.dreamwidth.org/474.html
+
+\makeatletter
+\newdimen\tu@tmpa%
+\newdimen\ydiffl%
+\newdimen\xdiffl%
+\newcommand\ydiff[2]{%
+    \coordinate (tmpnamea) at (#1);%
+    \coordinate (tmpnameb) at (#2);%
+    \pgfextracty{\tu@tmpa}{\pgfpointanchor{tmpnamea}{center}}%
+    \pgfextracty{\ydiffl}{\pgfpointanchor{tmpnameb}{center}}%
+    \advance\ydiffl by -\tu@tmpa%
+}
+\newcommand\xdiff[2]{%
+    \coordinate (tmpnamea) at (#1);%
+    \coordinate (tmpnameb) at (#2);%
+    \pgfextractx{\tu@tmpa}{\pgfpointanchor{tmpnamea}{center}}%
+    \pgfextractx{\xdiffl}{\pgfpointanchor{tmpnameb}{center}}%
+    \advance\xdiffl by -\tu@tmpa%
+}
+\makeatother
+\newcommand{\copyrightbox}[3][r]{%
+\begin{tikzpicture}%
+\node[inner sep=0pt,minimum size=2em](ciimage){#2};
+\usefont{OT1}{phv}{n}{n}\fontsize{4}{4}\selectfont
+\ydiff{ciimage.south}{ciimage.north}
+\xdiff{ciimage.west}{ciimage.east}
+\ifthenelse{\equal{#1}{r}}{%
+\node[inner sep=0pt,right=1ex of ciimage.south east,anchor=north west,rotate=90]%
+{\raggedleft\color{black!33}\parbox{\the\ydiffl}{\raggedright{}#3}};%
+}{%
+\ifthenelse{\equal{#1}{l}}{%
+\node[inner sep=0pt,right=1ex of ciimage.south west,anchor=south west,rotate=90]%
+{\raggedleft\color{black!33}\parbox{\the\ydiffl}{\raggedright{}#3}};%
+}{%
+\node[inner sep=0pt,below=1ex of ciimage.south west,anchor=north west]%
+{\raggedleft\color{black!33}\parbox{\the\xdiffl}{\raggedright{}#3}};%
+}
+}
+\end{tikzpicture}
+}
