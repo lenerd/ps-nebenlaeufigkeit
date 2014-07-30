@@ -142,13 +142,37 @@ verwendeten Prozessoren und der Zeitkomplexität.
 Das \emph{pardo} (auch \emph{in parallel do}) Statement wird verwendet, um
 anzugeben, dass der Rumpf einer For-Schleife für alle Indizes parallel
 ausgeführt werden soll.
-
 \begin{algorithmic}
     \ParDo {$1 \leq i \leq n$}
         \State process($i$)
     \EndParDo
 \end{algorithmic}
 
+\paragraph{Beispiel}
+Algorithmus \ref{alg:pram-sum} berechnet die Summe aus $n = 2^k$ Zahlen.
+Dabei wird ein ausbalancierter binärer Baum ähnlich wie in
+Abbildung \ref{fig:circuit} aufgebaut.
+Das Array $A$ der Eingabe stellt die Blätter des Baumes dar.
+Der Algorithmus sagt noch nichts aus, welcher Prozessor welche Berechnungen
+durchführt.
+
+\begin{algorithm}
+    \caption{Summe \cite[S.26]{jaja}}
+    \label{alg:pram-sum}
+    \begin{algorithmic}[1]
+    \Require $n = 2^k$ Zahlen in einem Array $A$
+    \Ensure Die Summe $S = \sum_{i=1}^n A(i)$
+    \ParDo {$1 \leq i \leq n$}
+        \State $B(i) \gets A(i)$
+    \EndParDo
+    \For {$h=1$ \textbf{to} $\log n$}
+        \ParDo {$1 \leq i \leq n/2^h$}
+            \State $B(i) \gets B(2i-1) + B(2i)$
+        \EndParDo
+    \EndFor
+    \State $S \gets B(1)$
+    \end{algorithmic}
+\end{algorithm}
 
 \subsubsection{Zugriffsbeschränkungen}
 Für PRAM Modelle existieren verschiedene Beschränkungen in Bezug auf simultanen
