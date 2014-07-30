@@ -34,7 +34,7 @@ Ist das SPL boolesch, so spricht man von einem \emph{boolean Circuit}.
 
 \paragraph{Beispiel}
 Zwei verschiedene Ansätze, die Summe aus acht Zahlen zu bilden, sind in
-Abbildung \ref{circuit} dargestellt.
+Abbildung \ref{fig:circuit} dargestellt.
 Circuit $A$ berechnet alle sieben Präfixsummen, addiert alle acht Zahlen
 nacheinander.
 $A$ besitzt eine Zeitkomplexität von $time = 7$.
@@ -48,7 +48,7 @@ Der Baum ist flacher, der Algorithmus hat eine Zeitkomplexität von $time = 3$.
         Zwei Circuits: Beide berechnen die Summe aus den Zahlen $A_1$ bis $A_8$.
         \cite[S.8]{jaja}
     }
-    \label{circuit}
+    \label{fig:circuit}
 \end{figure}
 
 \subsection{Network}
@@ -79,7 +79,7 @@ höhere Anzahl an Kommunikationsverbindungen.
 \paragraph{Beispiel}
 Berechnung des Produktes $y = Ax$ aus einer $n \times n$-Matrix $A$ und einem
 Vektor $x$ mit der Länge $n$ auf einem Ring aus $p$ Prozessoren
-(Abb. \ref{ring}).
+(Abb. \ref{fig:ring}).
 $n$ sei ein vielfaches von $p$ mit $r = \frac{n}{p}$.
 Die Matrix $A$ wird in $p$ Spalten $A_i$ der Form $n \times r$,
 der Vektor $x$ in $p$ Abschnitte der Länge $r$ aufgeteilt.
@@ -90,7 +90,7 @@ Die Summe aller $z_i$ ist der Ergebnisvektor $y = \sum_{i=1}^p z_i$.
     \centering
     \input{content/images/ring.tex}
     \caption{Netzwerk in Form eines Rings}
-    \label{ring}
+    \label{fig:ring}
 \end{figure}
 
 \begin{algorithm}
