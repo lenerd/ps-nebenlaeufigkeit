@@ -139,6 +139,16 @@ Die Operationenkomplexität einer PRAM ist das Produkt aus der Anzahl der
 verwendeten Prozessoren und der Zeitkomplexität.
 \cite[S.9ff.]{jaja}
 
+Das \emph{pardo} (auch \emph{in parallel do}) Statement wird verwendet, um
+anzugeben, dass der Rumpf einer For-Schleife für alle Indizes parallel
+ausgeführt werden soll.
+
+\begin{algorithmic}
+    \ParDo {$1 \leq i \leq n$}
+        \State process($i$)
+    \EndParDo
+\end{algorithmic}
+
 
 \subsubsection{Zugriffsbeschränkungen}
 Für PRAM Modelle existieren verschiedene Beschränkungen in Bezug auf simultanen
