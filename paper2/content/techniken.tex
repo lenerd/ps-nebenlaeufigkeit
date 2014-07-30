@@ -2,4 +2,51 @@
 
 \subsection{Divide and Conquer}
 
-\subsection{Pointerjumping}
+\subsection{Pointer Jumping}
+Pointer Jumping wird bei Problemen, die auf Graphen basieren angewandt.
+Die Kanten eines Graphen werden in Datenstrukturen als Zeiger auf einen anderen
+Knoten gespeichert.
+Die Technik erlaubt parallele Verarbeitung von Daten, die zum Beispiel in
+gerichteten Bäumen gespeichert sind.
+Zeigen die Kanten zu dem Vater eines Knoten; von den Blättern in Richtung
+Wurzel, spricht man auch von einem \emph{In-Tree}.
+
+Ein einfaches Beispiel ist die Suche nach den Wurzeln in einem Wald.
+\begin{problem}
+    Sei $F$ ein Wald aus einer Menge an In-Trees.
+    Gegeben ist ein Knoten $j$ in einem der Bäume in $F$.
+    Der Wald enthält $n$ Knoten und ist angegeben als ein Array $P$ der Länge
+    $n$.
+    $P(i)$ enthalte den Vater von $i$.
+    Ist $w$ eine Wurzel in $F$, so gelte $P(w) = w$.
+    Gesucht ist die Wurzel des Baumes, der den Knoten $j$ enthält.
+\end{problem}
+%
+In jedem Schritt wird der Vater eines Knoten auf den Vater des alten
+Vaterknoten gesetzt.
+Die Distanz zwischen einem bestimmten Knoten $i$ und $P(i)$ verdoppelt sich bei
+jeder Anwendung der Technik, es sei denn $P(i)$ zeigt auf eine Wurzel.
+%
+\begin{algorithm}
+    \caption{Pointer Jumping \cite[S.52]{jaja}}
+    \label{alg:pointerjumping}
+    \begin{algorithmic}[1]
+    \Require Ein Wald aus In-Trees jeweils mit einer Schleifer an der Wurzel.
+        Jede Kante zwischen den $n$ Knoten ist als Tupel $(i, P(i))$ mit
+        $1 \leq i \leq n$ durch ein Array $P$ definiert.
+    \Ensure Für jeden Knoten $i$ die Wurzel $S(i)$ des $i$ beinhaltenden
+        Baumes in einem Array $S$.
+    \ParDo {$1 \leq i \leq n$}
+        \State $S(i) \gets P(i)$
+        \While {$S(i) \neq S(S(i))$}
+            \State $S(i) \gets S(S(i))$
+        \EndWhile
+    \EndParDo
+    \end{algorithmic}
+\end{algorithm}
+%
+\begin{figure}
+    \caption{Ausführung von Algorithmus \ref{alg:pointerjumping}}
+\end{figure}
+%
+\cite[S.52ff]{jaja}
