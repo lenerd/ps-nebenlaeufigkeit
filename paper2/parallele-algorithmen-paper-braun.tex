@@ -13,13 +13,22 @@
 
 \usepackage{amsmath, amsfonts}
 \spnewtheorem{define}{Definition}{\bfseries}{\rmfamily}
+\usepackage{tikz}
+\usetikzlibrary[arrows]
+
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 \floatname{algorithm}{Algorithmus}
-\usepackage{tikz}
-\usetikzlibrary[arrows]
+% declaration of the new block
+\algblock{ParDo}{EndParDo}
+% customising the new block
+\algnewcommand\algorithmicparfor{\textbf{for}}
+\algnewcommand\algorithmicpardo{\textbf{pardo}}
+\algnewcommand\algorithmicendparfor{\textbf{end\ pardo}}
+\algrenewtext{ParDo}[1]{\algorithmicparfor\ #1\ \algorithmicpardo}
+\algrenewtext{EndParDo}{\algorithmicendparfor}
 
 \usepackage[style=alphabetic, backend=biber]{biblatex}
 \bibliography{../parallele-algorithmen} 
