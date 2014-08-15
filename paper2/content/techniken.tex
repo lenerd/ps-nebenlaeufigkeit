@@ -1,6 +1,88 @@
 \section{Techniken}
 
 \subsection{Divide and Conquer}
+Divide and Conquer ist vor allem bekannt als Paradigma von rekursiven
+Algorithmen.
+Ein Problem wird zunächst in kleinere Teilprobleme aufgeteilt (\emph{divide}).
+Diese werden rekursiv gelöst (\emph{conquer}) und anschließend zur der Lösung
+des ursprünglichen Problems zusammengesetzt (\emph{combine}).
+
+Das Aufteilen und wieder Zusammensetzen ist meist mit Aufwand verbunden.
+Entweder wird so geteilt, dass sich die Lösungen der Teilprobleme sehr einfach
+kombinieren lassen. Ein Algorithmus, der diesen Ansatz verwendet, ist
+Quicksort (Algorithmus \ref{alg:quicksort}).
+Es wird ein Pivotelement gewählt und die zu sortierende Liste anhand diesem
+aufgeteilt, so dass das Zusammenführen durch einfache Konkatenation möglich
+ist.
+Die zweite Möglichkeit, eine einfache Aufteilung zu verwenden und das
+die Arbeit beim Zusammenführen zu erledigen, verwendet Mergesort (Algorithmus
+\ref{alg:mergesort}).
+Die Eingabe wird in der Mitte geteilt, beide Teilarrays sortiert und
+anschließend zusammengeführt.
+
+\begin{algorithm}
+    \caption{Quicksort \cite[S.171]{cormen}}
+    \label{alg:quicksort}
+    \begin{algorithmic}[1]
+    \Require Ein Array $A$ mit den Indices $p$ und $r$.
+    \Ensure Das Array $A$ sortiert zwischen $p$ und $r$.
+    \If {$p < r$}
+        \State $q \gets \textsc{Partition}(A,r,p)$
+        \State $\textsc{Quicksort}(A, p, q - 1)$
+        \State $\textsc{Quicksort}(A, q + 1, r)$
+    \EndIf
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Mergesort \cite[S.34]{cormen}}
+    \label{alg:mergesort}
+    \begin{algorithmic}[1]
+    \Require Ein Array $A$ mit den Indices $p$ und $r$.
+    \Ensure Das Array $A$ sortiert zwischen $p$ und $r$.
+    \If {$p < r$}
+        \State $q \gets \lfloor (p + r) / 2 \rfloor$
+        \State $\textsc{Mergesort}(A, p, q)$
+        \State $\textsc{Mergesort}(A, q + 1, r)$
+        \State $\textsc{Merge}(A, p, q, r)$
+    \EndIf
+    \end{algorithmic}
+\end{algorithm}
+
+In beiden Beispielalgorithmen wird die Prozedur zweimal nacheinander rekursiv
+aufgerufen.
+Die Aufrufe bearbeiten verschiedene Teile des Arrays.
+Das naheliegendste Verfahren, um die Algorithmen zu parallelisieren, wäre es,
+die beiden rekursiven Aufrufe parallel auszuführen.
+Eine Aufteilung der Eingabe in $p$ Teile, die anschließend von $p$ Prozessoren
+bearbeitet werden wäre ebenso möglich.
+Allerdings ist ein schneller Algorithmus abhängig von der effizienten Ausführung
+des ersten und des dritten Schrittes.
+\cite[S.30ff.]{cormen}
+\cite[S.56ff.]{jaja}
+
+\begin{table}
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+        \hline
+        & Quicksort & Mergesort \\ \hline
+        Divide  &
+        Wahl eines Pivotelements; \newline
+        aufteilen in zwei Teilarrays anhand diesem. &
+        Teilung des Arrays in zwei Hälften. \\
+        \hline
+        Conquer &
+        Rekursives Sortieren beider Teile. &
+        Rekursives Sortieren beider Teile. \\
+        \hline
+        Combine &
+        Konkatenation der sortierten Teilarray. &
+        Zusammenfügen (Merge) der sortieren Teilarrays. \\
+        \hline
+    \end{tabularx}
+    \caption{Divide and Conquer in Quicksort und Mergesort}
+    \label{tab:dac}
+\end{table}
 
 \subsection{Pointer Jumping}
 Pointer Jumping wird bei Problemen, die auf Graphen basieren angewandt.
