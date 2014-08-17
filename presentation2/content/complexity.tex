@@ -1,4 +1,67 @@
 \section{Komplexität}
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Komplexität}
+    \tableofcontents[
+        currentsection,
+        hideothersubsections,
+        sectionstyle=show/shaded,
+    ]
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+\subsection{Schedulingprinzip}
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Schedulingprinzip}
+    Sei $T(n)$ die Laufzeit eines parallelen Algorithmus mit $W_i(n)$
+    Operationen zur Zeit $i$.
+    \begin{equation}
+        \begin{gathered}
+            T_p(n) = \sum_{i=1}^{T(n)} \left\lceil \frac{W_i(n)}{P} \right\rceil
+            <
+            \sum_{i=1}^{T(n)} \left( \frac{W_i(n)}{p} + 1 \right)
+            = \frac{W(n)}{p} + T(n) \\
+            \Rightarrow T_p(n) = \mathcal{O} \left( \frac{W(n)}{p} + T(n) \right)
+        \end{gathered}
+    \end{equation}
+    Auf $p$ Prozessoren kann der Algorithmus in der Zeit $T_p(n)$ laufen.
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+\subsection{Optimalität}
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Was ist optimal?}
+    \begin{definition}[time optimal]
+        Ein sequentieller Algorithmus mit $T(n) = \mathcal{O}(T^\ast(n))$.
+    \end{definition}
+    \begin{definition}[optimal]
+        Ein paralleler Algorithmus mit $W(n) = \Theta(T^\ast(n))$.
+    \end{definition}
+    \begin{definition}[work-time optimal]
+        Ein optimaler, paralleler Algorithmus mit der bestmöglichen Laufzeit.
+    \end{definition}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Was ist optimal?}
+    \framesubtitle{Beschleunigung}
+    \begin{definition}[Beschleunigung]
+        \begin{equation}
+            S_p(n) = \frac{T^\ast(n)}{T_p(n)} \leq p
+        \end{equation}
+    \end{definition}
+    \begin{block}{optimale Beschleunigung $S_p(n) = \Theta(p)$}
+        \begin{equation}
+            p = \mathcal{O} \left( \frac{T^\ast(n)}{T_p(n)} \right)
+        \end{equation}
+    \end{block}
+    
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
 
 \subsection{Komplexitätsklassen}
 %----------------------------------------------------------------------%SLIDE -
@@ -27,10 +90,10 @@
     \frametitle{Die Klasse $NC$}
     \begin{columns}
         \column{0.5\textwidth}
-        \begin{block}{$NC$}
+        \begin{definition}[$NC$]
             Die Menge aller Probleme, die parallel
             in $O(log^k n)$ Zeit auf $O(n^c)$ Prozessoren entschieden werden können.
-        \end{block}
+        \end{definition}
         \begin{itemize}
             \item alle effizient parallel lösbaren Probleme
         \end{itemize}
