@@ -1,15 +1,36 @@
 \section{Parallele Modelle}
 
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Parallele Modelle}
+    Circuits, Netzwerke, PRAMs
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+
 \subsection{Circuit}
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
     \frametitle{Circuit}
-    \begin{itemize}
-        \item ein gerichteter, azyklischer Graph (DAG)
-        \item Eingabe, Ausgabe
-        \item Operationen
-        \item Boolean Circuit
-    \end{itemize}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item gerichteter, azyklischer Graph (DAG)
+                \item Eingabe, Ausgabe
+                \item Operationen
+                \item Boolean Circuit
+                \item interessant für theoretische Überlegungen
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \input{content/images/dag}
+                \caption{Ein DAG}
+                \label{fig:dag}
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
