@@ -3,7 +3,11 @@
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
     \frametitle{Parallele Modelle}
-    Circuits, Netzwerke, PRAMs
+    \tableofcontents[
+        currentsection,
+        hideothersubsections,
+        sectionstyle=show/hide,
+    ]
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
@@ -146,7 +150,7 @@
         \begin{algorithmic}[1]
         \Require (1) Prozessor-ID $i$; (2) Anzahl Prozessoren $p$;
         (3) $i$te Submatrix $A_i$
-        (4) $i$te Subvektor $x_i$
+        (4) $i$ter Subvektor $x_i$
         \Ensure $P_i$ berechnet $y = A_1x_1 + \cdots + A_ix_i$
         und gibt das Ergebnis nach rechts. Bei Terminierung hat $P_1$ das
         Ergebnis $z = Ax$.
@@ -172,12 +176,27 @@
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
     \frametitle{Parallel Random Access Machine}
-    \begin{itemize}
-        \item \emph{shared memory} Modell
-        \item RAMs
-        \item gemeinsamer Speicher
-        \item \textbf{global read} und \textbf{global write}
-    \end{itemize}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{itemize}
+            \item \emph{shared memory} Modell
+            \item RAMs
+            \item gemeinsamer, globaler Speicher
+            \item \textbf{global read} und \textbf{global write}
+            \item \textbf{pardo} Statement
+                \begin{algorithmic}
+                    \ParDo {$1 \leq i \leq n$}
+                        \State process($i$)
+                    \EndParDo
+                \end{algorithmic}
+        \end{itemize}
+        \column{0.5\textwidth}
+        \begin{figure}
+            \centering
+            \input{content/images/pram}
+            \caption{Schema einer PRAM}
+        \end{figure}
+    \end{columns}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
@@ -185,7 +204,20 @@
 \begin{frame}
     \frametitle{Parallel Random Access Machine}
     \framesubtitle{Zugriffsbeschränkungen}
-    EREW, CREW, common CRCW, arbitrary CRCW, priority CRCW
+    Darf gleichzeitig auf Speicherzellen zugegriffen werden? \\
+    Subtypen mit verschiedenen Beschränkungen:
+    \begin{description}
+        \item[EREW] exclusive read exclusive write
+        \item[CREW] \emph{concurrent} read exclusive write
+        \item[CRCW] \emph{concurrent} read \emph{concurrent} write
+    \end{description}
+    \pause
+    Was passiert bei gleichzeitigem Schreiben?
+    \begin{description}
+        \item[common CRCW] Schreibzugriff nur bei übereinstimmendem Wert
+        \item[arbitrary CRCW] ein beliebiger Prozessor darf schreiben
+        \item[priority CRCW] Zugriff nach Rangordnung
+    \end{description}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
@@ -193,6 +225,22 @@
 \begin{frame}
     \frametitle{Parallel Random Access Machine}
     \framesubtitle{Beispiel}
-    an algorithm
+    \begin{algorithm}[H]
+        \caption{Summe \cite[S.26]{jaja}}
+        \label{alg:pram-sum}
+        \begin{algorithmic}[1]
+        \Require $n = 2^k$ Zahlen in einem Array $A$
+        \Ensure Die Summe $S = \sum_{i=1}^n A(i)$
+        \ParDo {$1 \leq i \leq n$}
+            \State $B(i) \gets A(i)$
+        \EndParDo
+        \For {$h=1$ \textbf{to} $\log n$}
+            \ParDo {$1 \leq i \leq n/2^h$}
+                \State $B(i) \gets B(2i-1) + B(2i)$
+            \EndParDo
+        \EndFor
+        \State $S \gets B(1)$
+        \end{algorithmic}
+    \end{algorithm}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
