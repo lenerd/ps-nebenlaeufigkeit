@@ -56,13 +56,14 @@
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
-\subsection{Network}
+\subsection{Netzwerk}
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
-    \frametitle{Network}
+    \frametitle{Netzwerk}
     \begin{columns}
         \column{0.5\textwidth}
         \begin{itemize}
+            \item \emph{distributed memory} Modell
             \item ungerichteter Graph
             \item RAMs
             \item feste Verbindungen
@@ -81,9 +82,89 @@
 
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
-    \frametitle{Network}
-    \framesubtitle{Beispiel}
-    an algorithm
+    \frametitle{Netzwerk}
+    \framesubtitle{Beispiel: Matrix-Vektor-Multiplikation}
+    \begin{columns}[c]
+        \begin{column}{0.5\textwidth}
+            \begin{equation*}
+                A \cdot x =
+                \only<1>{
+                    \begin{pmat}[{}]
+                        a_{11} & a_{12} & a_{13} & a_{14} \cr
+                        a_{21} & a_{22} & a_{23} & a_{24} \cr
+                        a_{31} & a_{32} & a_{33} & a_{34} \cr
+                        a_{41} & a_{42} & a_{43} & a_{44} \cr
+                    \end{pmat}
+                    \cdot
+                    \begin{pmat}[{}]
+                        x_1 \cr
+                        x_2 \cr
+                        x_3 \cr
+                        x_4 \cr
+                    \end{pmat}
+                }
+                \only<2->{
+                    \begin{pmat}[{|||}]
+                        a_{11} & a_{12} & a_{13} & a_{14} \cr
+                        a_{21} & a_{22} & a_{23} & a_{24} \cr
+                        a_{31} & a_{32} & a_{33} & a_{34} \cr
+                        a_{41} & a_{42} & a_{43} & a_{44} \cr
+                    \end{pmat}
+                    \cdot
+                    \begin{pmat}[{}]
+                        x_1 \cr\-
+                        x_2 \cr\-
+                        x_3 \cr\-
+                        x_4 \cr
+                    \end{pmat}
+                }
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \only<3>{
+                \begin{equation}
+                    z_i = A_i \cdot x_i =
+                    \begin{bmatrix}
+                        a_{1i} \\ a_{2i} \\ a_{3i} \\ a_{4i}
+                    \end{bmatrix}
+                    \cdot
+                    \begin{bmatrix} x_i \end{bmatrix}
+                \end{equation}
+                \begin{equation}
+                    A \cdot x = \sum_{i=1}^4 z_i
+                \end{equation}
+            }
+        \end{column}
+    \end{columns}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \begin{algorithm}[H]
+        \caption{Asynchronous Matrix Vector Product on a Ring \cite[S.18]{jaja}}
+        \begin{algorithmic}[1]
+        \Require (1) Prozessor-ID $i$; (2) Anzahl Prozessoren $p$;
+        (3) $i$te Submatrix $A_i$
+        (4) $i$te Subvektor $x_i$
+        \Ensure $P_i$ berechnet $y = A_1x_1 + \cdots + A_ix_i$
+        und gibt das Ergebnis nach rechts. Bei Terminierung hat $P_1$ das
+        Ergebnis $z = Ax$.
+        \begin{multicols}{2}
+            \State Berechne $z_i \gets A_ix_i$
+            \If {$i = 1$}
+                \State $y \gets 0$
+            \Else
+                \State \textbf{receive}($y$, left)
+            \EndIf
+            \State $y \gets y + z_i$
+            \State \textbf{send}($y$, right)
+            \If {$i = 1$}
+                \State \textbf{receive}($z$, left)
+            \EndIf
+        \end{multicols}
+        \end{algorithmic}
+    \end{algorithm}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
