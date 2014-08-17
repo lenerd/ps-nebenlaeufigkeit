@@ -14,6 +14,22 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+
+\usepackage{multicol}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\floatname{algorithm}{Algorithmus}
+% declaration of the new block
+\algblock{ParDo}{EndParDo}
+% customising the new block
+\algnewcommand\algorithmicparfor{\textbf{for}}
+\algnewcommand\algorithmicpardo{\textbf{pardo}}
+\algnewcommand\algorithmicendparfor{\textbf{end\ pardo}}
+\algrenewtext{ParDo}[1]{\algorithmicparfor\ #1\ \algorithmicpardo}
+\algrenewtext{EndParDo}{\algorithmicendparfor}
 
 \newcommand{\Renew}{\textsc{Renew}}
 
@@ -56,8 +72,8 @@
 {
   \usetheme{Malmoe}
 %  \usecolortheme[named=DarkGreen]{structure}
-  \usecolortheme{seahorse}
-  \useinnertheme{circles}
+  \usecolortheme{seagull}
+  \useinnertheme{default}
 
 % Disable navigation bar
   \setbeamertemplate{navigation symbols}{}
