@@ -70,7 +70,7 @@
             \begin{equation}
                 MS_1(n) = \begin{cases}
                     \Theta(1) & \text{wenn } n = 1 \\
-                    2T(n/2) + \Theta(n) & \text{wenn } n > 1
+                    2MS_1(n/2) + \Theta(n) & \text{wenn } n > 1
                 \end{cases}
             \end{equation}
         \item {\rmfamily \textsc{Mergesort}} läuft in $\Theta(n \log n)$
@@ -116,13 +116,13 @@
             \begin{equation}
                 MS'_\infty(n) = \begin{cases}
                     \Theta(1) & \text{wenn } n = 1 \\
-                    T(n/2) + \Theta(n) & \text{wenn } n > 1
+                    MS'_\infty(n/2) + \Theta(n) & \text{wenn } n > 1
                 \end{cases}
             \end{equation}
         \item {\rmfamily \textsc{Mergesort'}} läuft in $\Theta(n)$
         \item Speedup
             \begin{equation}
-                \frac{MS_1}{MS'_\infty} = \Theta(\log n)
+                \frac{MS_1(n)}{MS'_\infty(n)} = \Theta(\log n)
             \end{equation}
     \end{itemize}
 \end{frame}
