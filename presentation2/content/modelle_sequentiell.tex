@@ -3,31 +3,68 @@
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
     \frametitle{Sequentielle Modelle}
+    Eine Turingmaschine ist
     \begin{itemize}
-        \item gleich Mächtig zu Turingmaschine
-        \item einfacher zu benutzen
-        \item Basis für parallele Modelle
+        \item angenehm für Beweise zur Berechenbarkeit.
+        \item umständlich zu verwenden.
     \end{itemize}
-    SLP und RAM
+    Es gibt Modelle, die
+    \begin{itemize}
+        \item gleich mächtig zur Turingmaschine sind.
+        \item einfacher zu benutzen sind.
+        \item als Basis für parallele Modelle verwendet werden.
+    \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
 \subsection{Straight Line Program}
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
-    \frametitle{Straight Line Program}
-    \begin{itemize}
-        \item Beschreibung
-    \end{itemize}
+    \frametitle{Straight Line Program (SLP)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Variablen
+                    \begin{itemize}
+                        \item Eingabe
+                        \item Ausgabe
+                    \end{itemize}
+                \item Operationen
+                \item jeder Schritt eine Zuweisung
+                    \begin{equation*}
+                        var \gets operation(a, b, c)
+                    \end{equation*}
+                    
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{algorithmic}
+                \Require Zahlen $a_1$ bis $a_n$
+                \Ensure Summe $s$ aus $a_1$ bis $a_n$
+                \State $s \gets zero()$
+                \State $s \gets add(s, a_1)$
+                \State $s \gets add(s, a_2)$
+                \State $s \gets add(s, a_3)$
+                \State \ldots
+                \State $s \gets add(s, a_n)$
+            \end{algorithmic}
+        \end{column}
+    \end{columns}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
 \subsection{Random Access Machine}
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
-    \frametitle{Random Access Machine}
+    \frametitle{Random Access Machine (RAM)}
     \begin{itemize}
-        \item Beschreibung
+        \item Register und Speicherzellen
+        \item \textbf{load} und \textbf{store}
+        \item bedingte Verzweigungen
+        \item Arithmetik
+        \item \ldots
+        \item ähnlich zu realen Maschinen \\
+            $\Rightarrow$ einfach zu verwenden
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
