@@ -78,7 +78,7 @@
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
 
-\subsection{Parallelisierung}
+\subsection{1. Ansatz}
 %----------------------------------------------------------------------%SLIDE -
 \begin{frame}
     \frametitle{Parallelisierung}
@@ -124,6 +124,84 @@
             \begin{equation}
                 \frac{MS_1(n)}{MS'_\infty(n)} = \Theta(\log n)
             \end{equation}
+    \end{itemize}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \centering
+    \huge
+    Wo ist der Flaschenhals? \\
+
+    \pause
+    {\rmfamily\textsc{Merge}}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+\subsection{Cormen et al.'s parallel merge}
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Cormen et al.'s parallel merge}
+    \begin{figure}
+        \centering
+        \input{content/images/p-merge}
+        \caption{Multithreaded Merging \cite[S.798]{cormen}}
+        \label{fig:p-merge}
+    \end{figure}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Cormen et al.'s parallel merge}
+    \begin{equation}
+        \begin{gathered}
+            PM_\infty(n) =
+            \underbrace{PM_\infty\left( \frac{3}{4}n \right)}_{\text{rekursives Merge}}
+            + \underbrace{\Theta(\log n)}_{\text{Binary Search}}
+            \\
+            \Rightarrow PM_\infty(n) = \Theta(\log^2 n)
+        \end{gathered}
+    \end{equation}
+    \pause
+    Speedup
+    \begin{equation}
+        \frac{PM_1(n)}{PM_\infty(n)} = \Theta \left( \frac{n}{\log^2 n} \right)
+    \end{equation}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Cormen et al.'s parallel merge}
+    \begin{equation}
+        \begin{gathered}
+            \begin{split}
+                PMS_\infty(n) &= PMS_\infty(n/2) + PM_\infty(n) \\
+                &= PMS_\infty(n/2) + \Theta(\log^2 n)
+            \end{split}
+            \\
+            \Rightarrow PMS_\infty(n) = \Theta(\log^3 n)
+        \end{gathered}
+    \end{equation}
+    \pause
+    Speedup
+    \begin{equation}
+        \frac{PMS_1(n)}{PMS_\infty(n)} = \Theta \left( \frac{n}{\log^2 n} \right)
+    \end{equation}
+\end{frame}
+%----------------------------------------------------------------------%SLIDE -
+
+\subsection{Es geht schneller!}
+%----------------------------------------------------------------------%SLIDE -
+\begin{frame}
+    \frametitle{Es geht schneller!}
+    \begin{itemize}
+        \item Joseph J\'aj\'as „Pipelined Merge Sort“ \cite[S.163]{jaja} in
+            $\mathcal{O}(n)$
+        \item Richard Coles Algorithmen \cite[Kapitel 10]{reif} in
+            $\mathcal{O}(\log^2 n)$ und $\mathcal{O}(\log n)$
     \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------%SLIDE -
