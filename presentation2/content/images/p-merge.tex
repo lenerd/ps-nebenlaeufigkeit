@@ -7,7 +7,7 @@
     \tikzstyle{subarray}=[
         draw,
         rectangle,
-        minimum height=1.5em,
+        minimum height=1.6em,
     ]
     \tikzstyle{arrow}=[
         -latex,
@@ -20,38 +20,68 @@
         fill=gray,
     ]
 
-    \node (A) at (0,0) [] {$A$};
-    \node (Aldots) [subarray, right=0cm of A] {$\dots$};
-    \node (Al)     [subarray, low, right=0cm of Aldots, minimum width=3cm] {$\leq x$};
-    \node (Ax)     [subarray, right=0cm of Al] {$x$};
-    \node (Ah)     [subarray, high, right=0cm of Ax, minimum width=3cm] {$\geq x$};
-    \node (Ahdots) [subarray, right=0cm of Ah] {$\dots$};
-
     \node (T) at (-1,2) [] {$T$};
     \node (Tldots) [subarray, right=0cm of T] {$\dots$};
-    \node (Tll)    [subarray, low, right=0cm of Tldots, minimum width=2cm] {$\leq x$};
-    \node (Tx)     [subarray, right=0cm of Tll] {$x$};
-    \node (Tlh)    [subarray, high, right=0cm of Tx, minimum width=2cm] {$\geq x$};
-    \node (Tmdots) [subarray, right=0cm of Tlh] {$\dots$};
-    \node (Thl)    [subarray, low, right=0cm of Tmdots, minimum width=2cm] {$< x$};
-    \node (Thh)    [subarray, high, right=0cm of Thl, minimum width=2cm] {$\geq x$};
-    \node (Thdots) [subarray, right=0cm of Thh] {$\dots$};
+    \only<1>
+    {
+        \node (T1)    [subarray, low, right=0cm of Tldots, minimum width=4.5cm] {subarray 1};
+        \node (Tmdots) [subarray, right=0cm of T1] {$\dots$};
+        \node (T2)    [subarray, low, right=0cm of Tmdots, minimum width=4cm] {subarray 2};
+        \node (Thdots) [subarray, right=0cm of T2] {$\dots$};
+    }
+    \only<2>
+    {
+        \node (Tll)    [subarray, low, right=0cm of Tldots, minimum width=2cm] {$\leq x$};
+        \node (Tx)     [subarray, right=0cm of Tll, minimum width=0.5cm] {$x$};
+        \node (Tlh)    [subarray, high, right=0cm of Tx, minimum width=2cm] {$\geq x$};
+        \node (Tmdots) [subarray, right=0cm of Tlh] {$\dots$};
+        \node (T2)    [subarray, low, right=0cm of Tmdots, minimum width=4cm] {subarray 2};
+        \node (Thdots) [subarray, right=0cm of T2] {$\dots$};
+    }
+    \only<3->
+    {
+        \node (Tll)    [subarray, low, right=0cm of Tldots, minimum width=2cm] {$\leq x$};
+        \node (Tx)     [subarray, right=0cm of Tll, minimum width=0.5cm] {$x$};
+        \node (Tlh)    [subarray, high, right=0cm of Tx, minimum width=2cm] {$\geq x$};
+        \node (Tmdots) [subarray, right=0cm of Tlh] {$\dots$};
+        \node (Thl)    [subarray, low, right=0cm of Tmdots, minimum width=2cm] {$< x$};
+        \node (Thh)    [subarray, high, right=0cm of Thl, minimum width=2cm] {$\geq x$};
+        \node (Thdots) [subarray, right=0cm of Thh] {$\dots$};
+    }
 
-    \node (p1) at (Tll.north west) [yshift=1em] {$p_1$};
-    \node (q1) at (Tx.north)       [yshift=1em] {$q_1$};
-    \node (r1) at (Tlh.north east) [yshift=1em] {$r_1$};
-    \node (p2) at (Thl.north west) [yshift=1em] {$p_2$};
-    \node (q2) at (Thl.north east) [yshift=1em] {$q_2$};
-    \node (r2) at (Thh.north east) [yshift=1em] {$r_2$};
+    \node (p1) at (Tldots.north east) [yshift=1em] {$p_1$};
+    \node (r1) at (Tmdots.north west) [yshift=1em] {$r_1$};
+    \node (p2) at (Tmdots.north east) [yshift=1em] {$p_2$};
+    \node (r2) at (Thdots.north west) [yshift=1em] {$r_2$};
+    \only<2->
+    {
+        \node (q1) at (Tx.north)       [yshift=1em] {$q_1$};
+    }
+    \only<3->
+    {
+        \node (q2) at (Thl.north east) [yshift=1em] {$q_2$};
+    }
 
-    \node (q3) at (Ax.south)      [yshift=-1em] {$q_3$};
-    \node (p3) at (Al.south west) [yshift=-1em] {$p_3$};
-    \node (r3) at (Ah.south east) [yshift=-1em] {$r_3$};
+    \uncover<4->
+    {
+        \node (A) at (0,0) [] {$A$};
+        \node (Aldots) [subarray, right=0cm of A] {$\dots$};
+        \node (Al)     [subarray, low, right=0cm of Aldots, minimum width=3cm] {$\leq x$};
+        \node (Ax)     [subarray, right=0cm of Al, minimum width=0.5cm] {$x$};
+        \node (Ah)     [subarray, high, right=0cm of Ax, minimum width=3cm] {$\geq x$};
+        \node (Ahdots) [subarray, right=0cm of Ah] {$\dots$};
 
-    \draw [arrow, dashed] (Tx.south) -- (Ax.north);
-    \draw [arrow, gray] (Tll.south) -- (Al.north);
-    \draw [arrow, gray] (Thl.south) -- (Al.north);
-    \draw [arrow, darkgray] (Tlh.south) -- (Ah.north);
-    \draw [arrow, darkgray] (Thh.south) -- (Ah.north);
+        \node (q3) at (Ax.south)      [yshift=-1em] {$q_3$};
+        \node (p3) at (Al.south west) [yshift=-1em] {$p_3$};
+        \node (r3) at (Ah.south east) [yshift=-1em] {$r_3$};
+    }
+    \only<4->
+    {
+        \draw [arrow, dashed] (Tx.south) -- (Ax.north);
+        \draw [arrow, gray] (Tll.south) -- (Al.north);
+        \draw [arrow, gray] (Thl.south) -- (Al.north);
+        \draw [arrow, darkgray] (Tlh.south) -- (Ah.north);
+        \draw [arrow, darkgray] (Thh.south) -- (Ah.north);
+    }
 
 \end{tikzpicture}         
