@@ -2,6 +2,7 @@
 \begin{tikzpicture}
     [
     ]
+    %\draw [help lines] (-2,-1) grid (2,5);
 
     \node (nc_set) at (0,0.25) [
         ellipse,
@@ -17,7 +18,7 @@
     ] {};
     \node (ph_set) at (0,3) [
         circle,
-        draw,
+        %draw,
         minimum height=9em,
     ] {};
     \node (nc) at (0,0.25) [
@@ -28,5 +29,11 @@
     ] {$P$-Complete};
     \node (ph) at (0,3.5) [
     ] {$P$-Hard};
+
+    \draw [domain=180:360] plot ({1.7*cos(\x)}, {3+1.7*sin(\x)});
+    \draw (1.7,3) -- (1.7,3.6);
+    \draw (-1.7,3) -- (-1.7,3.6);
+    \draw [dotted] (1.7,3.6) -- (1.7,4.5);
+    \draw [dotted] (-1.7,3.6) -- (-1.7,4.5);
 
 \end{tikzpicture}         
