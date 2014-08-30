@@ -1,1 +1,52 @@
 \section{Betrachtung eines parallelen Mergesort}
+Das bereits angesprochene Mergesort (Algorithmus \ref{alg:mergesort}) ist ein
+sequentieller Sortieralgorithmus.
+Die Subroutine Merge (Algorithmus \ref{alg:merge}) hat einen linearen
+Zeitaufwand von $\Theta(n)$.
+Es lässt sich eine Formel für die sequentielle Laufzeit $MS_1(n)$ aufstellen.
+\begin{equation}
+    MS_1(n) = \begin{cases}
+        \Theta(1) & \text{wenn } n = 1 \\
+        2MS_1(n/2) + \Theta(n) & \text{wenn } n > 1
+    \end{cases}
+\end{equation}
+Mithilfe des Master-Theorems lässt sich die durchschnittliche Zeitkomplexität
+von $\Theta(n \cdot \log n)$ berechnen.
+%
+\begin{algorithm}
+    \caption{{\rmfamily \textsc{Merge}} \cite[S.31]{cormen}}
+    \label{alg:merge}
+    \begin{algorithmic}[1]
+        \Require Ein Array $A$ mit sortierten Subarrays $A[p:q]$ und
+            $A[q+1:r]$.
+        \Ensure Das Array $A$ sortiert zwischen $p$ und $r$.
+        \setlength\multicolsep{0pt}
+        \begin{multicols}{2}
+            \State $n_1 \gets q - p + 1$
+            \State $n_2 \gets r - q$
+            \State $L[1:n_1 +1]$, $R[1:n_2 + 1]$
+            \For {$i \gets 1$ \textbf{to} $n_1$}
+                \State $L[i] \gets A[p + i - 1]$
+            \EndFor
+            \For {$j \gets 1$ \textbf{to} $n_2$}
+                \State $R[j] \gets A[q + j]$
+            \EndFor
+            \State $L[n_1 + 1] \gets \infty$
+            \State $R[n_2 + 1] \gets \infty$
+            \State $i \gets 1$
+            \State $j \gets 1$
+            \For {$k \gets p$ \textbf{to} $r$}
+                \If {$L[i] \leq R[j]$}
+                    \State $A[k] \gets L[i]$
+                    \State $i \gets i + 1$
+                \Else
+                    \State $A[k] \gets R[j]$
+                    \State $j \gets i + 1$
+                \EndIf
+            \EndFor
+        \end{multicols}
+    \end{algorithmic}
+\end{algorithm}
+
+Im Folgenden werden verschiedene Ansätze besprochen, um die Ausführungszeit
+durch Parallelisierung zu beschleunigen.
