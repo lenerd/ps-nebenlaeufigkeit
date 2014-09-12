@@ -50,3 +50,129 @@ von $\Theta(n \cdot \log n)$ berechnen.
 
 Im Folgenden werden verschiedene Ansätze besprochen, um die Ausführungszeit
 durch Parallelisierung zu beschleunigen.
+
+\subsection{Ein naiver Ansatz}
+Wie in Abschnitt \ref{divide} angedeutet ist der wohl naheliegendste Ansatz, die
+beiden rekursiven Aufrufe von Mergesort in den Zeilen 3 und 4 parallel
+auszuführen.
+Da jeweils ein anderer Abschnitt des Arrays bearbeitet wird, ist die auch ohne
+weitere Vorkehrungen möglich (Algorithmus~\ref{alg:mergesort-a}).
+\begin{algorithm}
+    \caption{{\rmfamily \textsc{Mergesort'}}}
+    \label{alg:mergesort-a}
+    \begin{algorithmic}[1]
+        \Require Ein Array $A$ mit den Indices $p$ und $r$.
+        \Ensure Das Array $A$ sortiert zwischen $p$ und $r$.
+        \If {$p < r$}
+            \State $q \gets \lfloor (p + r) / 2 \rfloor$
+            \ParDo {$a,b$ \textbf{in} $[(p,q),(q+1,r)]$}
+                \State {\rmfamily \textsc{Mergesort}}$(A, a, b)$
+            \EndParDo
+            \State {\rmfamily \textsc{Merge}}$(A, p, q, r)$
+        \EndIf
+    \end{algorithmic}
+\end{algorithm}
+Wenn eine ausreichende Menge an Prozessoren zur Verfügung steht, ist
+$MS'_\infty(n)$ die neue Zeitkomplexität.
+\begin{equation}
+    MS'_\infty(n) = \begin{cases}
+        \Theta(1) & \text{wenn } n = 1 \\
+        MS'_\infty(n/2) + \Theta(n) & \text{wenn } n > 1
+    \end{cases}
+\end{equation}
+Es folgt eine durchschnittliche Zeitkomplexität von $\Theta(n)$.
+Die durch die Änderung entstandene Beschleunigung entspricht
+$\frac{MS_1(n)}{MS'_\infty(n)} = \Theta(\log n)$.
+Eine logarithmische Beschleunigung mag sich bei einigen wenigen zusätzlichen
+Prozessoren noch lohnen, während es in größeren Dimensionen keinen signifikanten
+Unterschied in Bezug auf die Ausführungszeit macht.
+\cite[S.797f.]{cormen}
+
+\subsection{Multithreaded Merge}
+Der Flaschenhals liegt in der Merge Subroutine.
+Die sequentielle Zeitkomplexität ist groß genug um einen wesentlichen Teil der
+gesamten Komplexität von Mergesort zu stellen.
+
+Eine Möglichkeit das Mergen zu parallelisieren ist der
+Algorithmus~\ref{alg:p-merge} aus \cite{cormen}.
+
+Zunächst wird das mittlere Element des ersten Arrays gewählt.
+Es befindet sich an der Stelle $q_1$ und besitzt den Wert $x$.
+Da vorausgesetzt wird, dass es sich um ein sortiertes Array handelt, besitzen
+alle Elemente vor der Position $q_1$ einen Wert $\leq x$ und alle dahinter
+Wert $\geq x$.
+Mithilfe einer Binären Suche wird die Position $q_2$ in dem zweiten Array
+gefunden, an der man das gewählte Element einsortieren müsste, damit alle
+Elemente vor $q_2$ einen Wert $< x$ besitzen.
+Nun wurden beide Arrays (durch $q_1$ und $q_2$ getrennt) in jeweils zwei
+Teilarrays aufgeteilt.
+Auf diese wird parallel, rekursiv der \textsc{P-Merge} Algorithmus angewandt.
+Eine schematische Darstellung ist der Abbildung~\ref{fig:p-merge} zu entnehmen.
+
+\begin{figure}
+    \centering
+    \input{content/images/p-merge.tex}
+    \caption{Multithreaded Merging \cite[S.798]{cormen}}
+    \label{fig:p-merge}
+\end{figure}
+
+\begin{algorithm}
+    \caption{\textsc{P-Merge} \cite[S.800]{cormen}}
+    \label{alg:p-merge}
+    \begin{algorithmic}[1]
+        \Require Zwei Subarrays $T[p_1:r_1]$ und $T[p_2:r_2]$;
+            Ziel $A[p_3]$
+        \Ensure Die Subarrays von $T$ vereinigt an Position $p_3$ in $A$
+        \State $n_1 \gets r_1 - p_1 + 1$
+        \State $n_2 \gets r_2 - p_2 + 1$
+        \If {$n_1 < n_2$}
+            \State exchange $p_1$ with $p_2$
+            \State exchange $r_1$ with $r_2$
+            \State exchange $n_1$ with $n_2$
+        \EndIf
+        \If {$n_1 = 0$}
+            \State \textbf{return}
+        \Else
+            \State $q_1 \gets \lfloor ( p_1 + r_1 ) / 2 \rfloor$
+            \State $q_2 \gets \textsc{Binary-Search}(T[q_1], T, p_2, r_2)$
+            \State $q_3 \gets p_3 + (q_1 - p_1) + (q_2 - p_2)$
+            \State $A[q_3] \gets T[q_1]$
+            \ParDo {$a,b,c,d,e$ \textbf{in} $[(p_1, q_1 - 1, p_2, q_2 - 1, p_3),
+                    (q_1 + 1, r_1, q_2, r_2, q_3 + 1)]$}
+                \State $\textsc{P-Merge}(T,a, b, c, d, A, e)$
+            \EndParDo
+        \EndIf
+    \end{algorithmic}
+\end{algorithm}
+
+Die Zeitkomplexität des parallelen Merge berechnet mit dem Master-Theorem sich
+wie folgt:
+\begin{equation}
+    \begin{gathered}
+        PM_\infty(n) =
+        \underbrace{PM_\infty\left( \frac{3}{4}n \right)}_{\text{rekursives Merge}}
+        + \underbrace{\Theta(\log n)}_{\text{binäre Suche}}
+        \\
+        \Rightarrow PM_\infty(n) = \Theta(\log^2 n)
+    \end{gathered}
+\end{equation}
+Die Beschleunigung im Gegensatz zu dem sequentiellen Merge
+(Algorithmus~\ref{alg:merge}) beträgt $\Theta(\frac{n}{\log^2 n})$
+Die Beschleunigung gilt ebenfalls für das kompletten parallelen Mergesort
+(Algorithmus~TODO).
+Die Laufzeit ist die folgende:
+\begin{equation}
+    \begin{gathered}
+        \begin{split}
+            PMS_\infty (n) &= PMS_\infty(n/2) + PM_\infty(n) \\
+            &= PMS_\infty(n/2) + \Theta(\log^2 n)
+        \end{split} \\
+        \Rightarrow PMS_\infty(n) = \Theta(\log^3 n)
+    \end{gathered}
+\end{equation}
+Eine polylogarithmische Zeitkomplexität ist eine deutliche Verbesserung im
+Gegensatz zu dem ersten Versuch, Mergesort zu parallelisieren.
+Weitergehende Überlegungen führen zu schnelleren Algorithmen, welche in
+$\mathcal{O}(\log n)$ laufen.
+Für eine ausführliche Beschreibung wird auf \cite[Kapitel 10]{reif} und
+\cite[S.163]{jaja} verwiesen.
