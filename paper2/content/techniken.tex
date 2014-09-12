@@ -10,13 +10,13 @@ des ursprünglichen Problems zusammengesetzt (\emph{combine}).
 Das Aufteilen und wieder Zusammensetzen ist meist mit Aufwand verbunden.
 Entweder wird so geteilt, dass sich die Lösungen der Teilprobleme sehr einfach
 kombinieren lassen. Ein Algorithmus, der diesen Ansatz verwendet, ist
-Quicksort (Algorithmus \ref{alg:quicksort}).
+Quicksort (Algorithmus~\ref{alg:quicksort}).
 Es wird ein Pivotelement gewählt und die zu sortierende Liste anhand diesem
 aufgeteilt, so dass das Zusammenführen durch einfache Konkatenation möglich
 ist.
 Die zweite Möglichkeit, eine einfache Aufteilung zu verwenden und das
-die Arbeit beim Zusammenführen zu erledigen, verwendet Mergesort (Algorithmus
-\ref{alg:mergesort}).
+die Arbeit beim Zusammenführen zu erledigen, verwendet Mergesort
+(Algorithmus~\ref{alg:mergesort}).
 Die Eingabe wird in der Mitte geteilt, beide Teilarrays sortiert und
 anschließend zusammengeführt.
 
@@ -111,9 +111,9 @@ In jedem Schritt wird der Vater eines Knoten auf den Vater des alten
 Vaterknoten gesetzt.
 Die Distanz zwischen einem bestimmten Knoten $i$ und $P(i)$ verdoppelt sich bei
 jeder Anwendung der Technik, es sei denn $P(i)$ zeigt auf eine Wurzel.
-In Abbildung \ref{fig:pointerjumping} ist die Anwendung des Algorithmus
-\ref{alg:pointerjumping} auf einen Wald bestehend aus einem verzweigten und
-einem linearen Baum zu sehen.
+In Abbildung~\ref{fig:pointerjumping} ist die Anwendung des
+Algorithmus~\ref{alg:pointerjumping} auf einen Wald bestehend aus einem
+verzweigten und einem linearen Baum zu sehen.
 %
 \begin{algorithm}
     \caption{Pointer Jumping \cite[S.52]{jaja}}
@@ -139,7 +139,7 @@ einem linearen Baum zu sehen.
     \subfloat[]{\input{content/images/forest_b.tex}}
     \newline
     \subfloat[]{\input{content/images/forest_c.tex}}
-    \caption{Ausführung von Algorithmus \ref{alg:pointerjumping}
+    \caption{Ausführung von Algorithmus~\ref{alg:pointerjumping}
     (nach \cite[S.54]{jaja})}
     \label{fig:pointerjumping}
 \end{figure}
