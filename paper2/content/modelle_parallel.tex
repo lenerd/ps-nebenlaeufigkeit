@@ -137,8 +137,9 @@ Der Umfang der Kommunikation zwischen den Prozessoren ist die Menge an Daten,
 welche zwischen den lokalen und dem globalen Speicher übermittelt wird.
 Jedem Prozessor ist zusätzlich seine eigene Identität bekannt, so dass bedingte
 Anweisungen ermöglichen, Blöcke nur auf bestimmten Prozessoren auszuführen.
-Die Operationenkomplexität einer PRAM ist das Produkt aus der Anzahl der
-verwendeten Prozessoren und der Zeitkomplexität.
+Die Operationenkomplexität einer PRAM ist die Anzahl der ausgeführten
+Operationen und wird nach oben durch das Produkt aus Zeit und Anzahl der
+Prozessoren begrenzt.
 \cite[S.9ff.]{jaja}
 
 Das \emph{pardo} (auch \emph{in parallel do}) Statement wird verwendet, um
